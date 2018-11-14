@@ -6,7 +6,6 @@ This is the central repository for all the materials related to <em>Kafka Stream
 </a>
 <h2> Description </h2>
 <p align="justify">
-The book Kafka Streams: Real-time Stream Processing! helps you understand the stream processing in general and apply that skill to Kafka streams programming. This book is focusing mainly on the new generation of the Kafka Streams library available in the Apache Kafka 2.0. 
-The primary focus of this book is on Kafka Streams. However, the book also touches on the other Kafka capabilities and concepts that are necessary to grasp the Kafka Streams programming.
+  The book <em>Kafka Streams: Real-time Stream Processing!</em> helps you understand the stream processing in general and apply that skill to Kafka streams programming. This book is focusing mainly on the new generation of the Kafka Streams library available in the Apache Kafka 2.0. The primary focus of this book is on Kafka Streams. However, the book also touches on the other Kafka capabilities and concepts that are necessary to grasp the Kafka Streams programming.
 </p>
 </div>
