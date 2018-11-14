@@ -3,7 +3,7 @@ This is the central repository for all the materials related to <em>Kafka Stream
 <div>
 
 <a href="https://www.learningjournal.guru/ebook/kafka-streams-real-time-stream-processing/">
-<img src="https://www.learningjournal.guru/_resources/img/jpg-7x/kafka-streams-real-time-stream-processing.jpg" alt="Kafka Streams : Real-time Stream Processing" width="300" align="left" class="shadow">
+<img src="https://www.learningjournal.guru/_resources/img/jpg-7x/kafka-streams-real-time-stream-processing.jpg" alt="Kafka Streams : Real-time Stream Processing" width="300" align="left"> {: .shadow}
 </a>
 
 <h2> Description </h2>
