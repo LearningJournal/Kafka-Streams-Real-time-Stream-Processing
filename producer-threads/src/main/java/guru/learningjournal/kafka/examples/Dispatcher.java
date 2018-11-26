@@ -15,7 +15,6 @@
 
 package guru.learningjournal.kafka.examples;
 
-import com.sun.istack.internal.NotNull;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.logging.log4j.LogManager;
@@ -49,12 +48,13 @@ public class Dispatcher implements Runnable {
      *                     Location of file is relative to the class path.
      *                     each line in the file is considered an event.
      */
-    Dispatcher(KafkaProducer<Integer, String> producer, String topicName, @NotNull String fileLocation) {
+    Dispatcher(KafkaProducer<Integer, String> producer, String topicName, String fileLocation) {
         this.producer = producer;
         this.topicName = topicName;
         this.fileLocation = fileLocation;
     }
 
+    @Override
     public void run() {
         logger.info("Start processing " + fileLocation + "...");
         ClassLoader classLoader = getClass().getClassLoader();
