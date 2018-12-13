@@ -1,186 +1,192 @@
-/*
- * Copyright (c) 2018. Prashant Kumar Pandey
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and limitations under the License.
- */
 
 package guru.learningjournal.kafka.examples;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
-/**
- * Stock data class represents NSE data element
- *
- * @author prashant
- * @author www.learningjournal.guru
- */
-@JsonPropertyOrder({"symbol", "series", "open", "high", "low", "close", "last", "previousClose",
-        "totalTradedQty", "totalTradedVal", "tradeDate", "totalTrades", "isinCode"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+    "symbol",
+    "series",
+    "open",
+    "high",
+    "low",
+    "close",
+    "last",
+    "previousClose",
+    "totalTradedQty",
+    "totalTradedVal",
+    "tradeDate",
+    "totalTrades",
+    "isinCode"
+})
 public class StockData {
+
+    @JsonProperty("symbol")
     private String symbol;
+    @JsonProperty("series")
     private String series;
-    private Double open;
+    @JsonProperty("open")
+    private String open;
+    @JsonProperty("high")
     private Double high;
+    @JsonProperty("low")
     private Double low;
+    @JsonProperty("close")
     private Double close;
+    @JsonProperty("last")
     private Double last;
+    @JsonProperty("previousClose")
     private Double previousClose;
+    @JsonProperty("totalTradedQty")
     private Double totalTradedQty;
+    @JsonProperty("totalTradedVal")
     private Double totalTradedVal;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy", timezone = "IST")
+    @JsonProperty("tradeDate")
     private Date tradeDate;
-    private String totalTrades;
+    @JsonProperty("totalTrades")
+    private Double totalTrades;
+    @JsonProperty("isinCode")
     private String isinCode;
-    private static final Logger logger = LogManager.getLogger();
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
-    public void setOpen(Double open) {
-        this.open = open;
-    }
-
-    public void setHigh(Double high) {
-        this.high = high;
-    }
-
-    public void setLow(Double low) {
-        this.low = low;
-    }
-
-    public void setClose(Double close) {
-        this.close = close;
-    }
-
-    public void setLast(Double last) {
-        this.last = last;
-    }
-
-    public void setPreviousClose(Double previousClose) {
-        this.previousClose = previousClose;
-    }
-
-    public void setTotalTradedQty(Double totalTradedQty) {
-        this.totalTradedQty = totalTradedQty;
-    }
-
-    public void setTotalTradedVal(Double totalTradedVal) {
-        this.totalTradedVal = totalTradedVal;
-    }
-
-    /**
-     * converts a String data into a Date
-     * @param tradeDate
-     */
-    public void setTradeDate(String tradeDate) {
-        Date dt = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-        try {
-            dt = dateFormat.parse(tradeDate);
-            this.tradeDate = dt;
-        } catch (ParseException e) {
-            logger.error("Invalid date format - " + tradeDate + "\n Defaulting to current date.");
-            this.tradeDate = dt;
-        }
-    }
-
-    public void setTotalTrades(String totalTrades) {
-        this.totalTrades = totalTrades;
-    }
-
-    public void setIsinCode(String isinCode) {
-        this.isinCode = isinCode;
-    }
-
+    @JsonProperty("symbol")
     public String getSymbol() {
         return symbol;
     }
 
+    @JsonProperty("symbol")
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @JsonProperty("series")
     public String getSeries() {
         return series;
     }
 
-    public Double getOpen() {
+    @JsonProperty("series")
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    @JsonProperty("open")
+    public String getOpen() {
         return open;
     }
 
+    @JsonProperty("open")
+    public void setOpen(String open) {
+        this.open = open;
+    }
+
+    @JsonProperty("high")
     public Double getHigh() {
         return high;
     }
 
+    @JsonProperty("high")
+    public void setHigh(Double high) {
+        this.high = high;
+    }
+
+    @JsonProperty("low")
     public Double getLow() {
         return low;
     }
 
+    @JsonProperty("low")
+    public void setLow(Double low) {
+        this.low = low;
+    }
+
+    @JsonProperty("close")
     public Double getClose() {
         return close;
     }
 
+    @JsonProperty("close")
+    public void setClose(Double close) {
+        this.close = close;
+    }
+
+    @JsonProperty("last")
     public Double getLast() {
         return last;
     }
 
+    @JsonProperty("last")
+    public void setLast(Double last) {
+        this.last = last;
+    }
+
+    @JsonProperty("previousClose")
     public Double getPreviousClose() {
         return previousClose;
     }
 
+    @JsonProperty("previousClose")
+    public void setPreviousClose(Double previousClose) {
+        this.previousClose = previousClose;
+    }
+
+    @JsonProperty("totalTradedQty")
     public Double getTotalTradedQty() {
         return totalTradedQty;
     }
 
+    @JsonProperty("totalTradedQty")
+    public void setTotalTradedQty(Double totalTradedQty) {
+        this.totalTradedQty = totalTradedQty;
+    }
+
+    @JsonProperty("totalTradedVal")
     public Double getTotalTradedVal() {
         return totalTradedVal;
     }
 
+    @JsonProperty("totalTradedVal")
+    public void setTotalTradedVal(Double totalTradedVal) {
+        this.totalTradedVal = totalTradedVal;
+    }
+
+    @JsonProperty("tradeDate")
     public Date getTradeDate() {
         return tradeDate;
     }
 
-    public String getTotalTrades() {
+    @JsonProperty("tradeDate")
+    public void setTradeDate(Date tradeDate) {
+        this.tradeDate = tradeDate;
+    }
+
+    @JsonProperty("totalTrades")
+    public Double getTotalTrades() {
         return totalTrades;
     }
 
+    @JsonProperty("totalTrades")
+    public void setTotalTrades(Double totalTrades) {
+        this.totalTrades = totalTrades;
+    }
+
+    @JsonProperty("isinCode")
     public String getIsinCode() {
         return isinCode;
     }
 
-    /**
-     * Static function to read data from given dataFile
-     * @param dataFile data file name in resource folder
-     * @return List of StockData Instance
-     * @throws IOException
-     */
-    static List<StockData> getStocks(String dataFile) throws IOException, NullPointerException {
-
-        URL fileURI = ClassLoader.class.getResource(dataFile);
-        File file = new File(fileURI.getFile());
-        MappingIterator<StockData> stockDataIterator = new CsvMapper().readerWithTypedSchemaFor(StockData.class).readValues(file);
-        return stockDataIterator.readAll();
+    @JsonProperty("isinCode")
+    public void setIsinCode(String isinCode) {
+        this.isinCode = isinCode;
     }
-}
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("symbol", symbol).append("series", series).append("open", open).append("high", high).append("low", low).append("close", close).append("last", last).append("previousClose", previousClose).append("totalTradedQty", totalTradedQty).append("totalTradedVal", totalTradedVal).append("tradeDate", tradeDate).append("totalTrades", totalTrades).append("isinCode", isinCode).toString();
+    }
+
+}

@@ -23,6 +23,12 @@
     <artifactId>json-producer</artifactId>
     <version>2.0.0</version>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <kafka.version>2.0.0</kafka.version>
+        <junit.version>5.3.1</junit.version>
+    </properties>
+
     <build>
         <plugins>
             <!-- Maven Compiler Plugin-->
@@ -31,9 +37,28 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <!-- Json Schema to POJO plugin-->
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.5.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/resources/schema/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                            <includeAdditionalProperties>false</includeAdditionalProperties>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -43,13 +68,13 @@
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>2.0.0</version>
+            <version>${kafka.version}</version>
         </dependency>
         <!-- Apache Kafka Streams-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
-            <version>2.0.0</version>
+            <version>${kafka.version}</version>
         </dependency>
         <!-- Apache Log4J2 binding for SLF4J -->
         <dependency>
@@ -57,32 +82,40 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-csv -->
+
+        <!-- Jackson CSV  -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-csv</artifactId>
             <version>2.9.6</version>
         </dependency>
 
+        <!--Apache commons-->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
         <!-- JUnit5 Jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.3.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- JUnit 5 Jupiter Engine -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.3.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- JUnit 5 Jupiter Parameterized Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.3.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

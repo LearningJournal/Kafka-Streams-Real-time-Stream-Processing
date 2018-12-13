@@ -16,15 +16,19 @@
 package guru.learningjournal.kafka.examples;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +48,20 @@ public class JsonProducerDemo {
     private static final String kafkaConfig = "/kafka.properties";
 
     /**
+     * private static method to read data from given dataFile
+     * @param dataFile data file name in resource folder
+     * @return List of StockData Instance
+     * @throws IOException, NullPointerException
+     */
+    private static List<StockData> getStocks(String dataFile) throws IOException, NullPointerException {
+
+        URL fileURI = ClassLoader.class.getResource(dataFile);
+        File file = new File(fileURI.getFile());
+        MappingIterator<StockData> stockDataIterator = new CsvMapper().readerWithTypedSchemaFor(StockData.class).readValues(file);
+        return stockDataIterator.readAll();
+    }
+
+    /**
      * Application entry point
      * you must provide the topic name and at least one event file
      *
@@ -54,7 +72,6 @@ public class JsonProducerDemo {
         final KafkaProducer<String, JsonNode> producer;
         final String topicName;
         final ObjectMapper objectMapper = new ObjectMapper();
-        //List<JsonNode> stockDataList = new ArrayList<>();
         List<Thread> dispatchers = new ArrayList<>();
         InputStream kafkaConfigStream;
 
@@ -66,10 +83,12 @@ public class JsonProducerDemo {
         logger.info("Starting JsonProducerDemo...");
         topicName = args[0];
         String[] eventFiles = Arrays.copyOfRange(args, 1, args.length);
+        //ArrayList<ArrayList<JsonNode>> stockArrayOfList = new ArrayList<>();
         List<JsonNode>[] stockArrayOfList = new List[eventFiles.length];
         for(int i=0;i<stockArrayOfList.length;i++){
             stockArrayOfList[i]=new ArrayList<>();
         }
+
 
         logger.trace("Creating Kafka producer...");
         Properties properties = new Properties();
@@ -89,7 +108,7 @@ public class JsonProducerDemo {
         for (int i = 0; i < eventFiles.length; i++) {
             logger.info("Preparing data for " + eventFiles[i]);
             try {
-                for (StockData s : StockData.getStocks(eventFiles[i])) {
+                for (StockData s : getStocks(eventFiles[i])) {
                     stockArrayOfList[i].add(objectMapper.valueToTree(s));
                 }
 
