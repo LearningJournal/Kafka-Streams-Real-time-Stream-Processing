@@ -1,0 +1,2 @@
+rem Create topic in Confluent Kafka
+C:\Users\prashant\Downloads\confluent-5.0.1\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic nse-bhav-avro

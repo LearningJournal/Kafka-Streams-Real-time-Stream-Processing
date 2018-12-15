@@ -1,0 +1,20 @@
+{"namespace": "guru.learningjournal.kafka.examples",
+  "type": "record",
+  "name": "StockData",
+  "fields": [
+    {"name": "symbol", "type": ["null", "string"]},
+    {"name": "series",  "type":["null", "string"]},
+    {"name": "open",  "type": ["null", "float"]},
+    {"name": "high",  "type": ["null", "float"]},
+    {"name": "low",  "type": ["null", "float"]},
+    {"name": "close",  "type": ["null", "float"]},
+    {"name": "last",  "type": ["null", "float"]},
+    {"name": "previousClose",  "type": ["null", "float"]},
+    {"name": "totalTradedQty",  "type": ["null", "long"]},
+    {"name": "totalTradedVal",  "type": ["null", "double"]},
+    {"name": "tradeDate",  "type": ["null", "string"]},
+    {"name": "totalTrades",  "type": ["null", "int"]},
+    {"name": "isinCode",  "type": ["null", "string"]}
+  ]
+}
+

@@ -1,0 +1,2 @@
+rem This consumer will show you some junk characters as the messages are in Avro binary format
+C:\Users\prashant\Downloads\confluent-5.0.1\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic nse-bhav-avro --from-beginning
