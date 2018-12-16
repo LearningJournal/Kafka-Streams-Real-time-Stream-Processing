@@ -1,0 +1,1 @@
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic nse05 --config min.insync.replicas=2 & kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic nse06 --config min.insync.replicas=2
