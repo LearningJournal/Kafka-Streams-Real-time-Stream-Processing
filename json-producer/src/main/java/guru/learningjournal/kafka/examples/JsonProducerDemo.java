@@ -67,6 +67,7 @@ public class JsonProducerDemo {
      *
      * @param args topicName (Name of the Kafka topic) list of files (list of files in the classpath)
      */
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
 
         final KafkaProducer<String, JsonNode> producer;
@@ -83,7 +84,6 @@ public class JsonProducerDemo {
         logger.info("Starting JsonProducerDemo...");
         topicName = args[0];
         String[] eventFiles = Arrays.copyOfRange(args, 1, args.length);
-        //ArrayList<ArrayList<JsonNode>> stockArrayOfList = new ArrayList<>();
         List<JsonNode>[] stockArrayOfList = new List[eventFiles.length];
         for(int i=0;i<stockArrayOfList.length;i++){
             stockArrayOfList[i]=new ArrayList<>();

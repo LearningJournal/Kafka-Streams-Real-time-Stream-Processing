@@ -15,9 +15,9 @@
 
 package guru.learningjournal.kafka.examples;
 
-import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
-import io.confluent.kafka.serializers.KafkaAvroDeserializer;
-import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -33,12 +33,12 @@ import java.util.Collections;
 import java.util.Properties;
 
 /**
- * Avro consumer for StockData object
+ * Kafka consumer demo to read Json serialized messages from Kafka
  *
  * @author prashant
  * @author www.learningjournal.guru
  */
-public class AvroConsumer {
+public class JsonConsumer {
     private static final Logger logger = LogManager.getLogger();
     private static final String kafkaConfig = "/kafka.properties";
 
@@ -52,6 +52,7 @@ public class AvroConsumer {
         final String topicName;
         final String groupName;
         InputStream kafkaConfigStream;
+        ObjectMapper objectMapper = new ObjectMapper();
 
         if (args.length < 2) {
             System.out.println("Please provide command line arguments: topicName groupName");
@@ -70,21 +71,23 @@ public class AvroConsumer {
             properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
             properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
             properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-            properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class);
-            properties.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
-            properties.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
+            properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
         } catch (IOException e) {
             logger.error(e.getMessage());
             System.exit(-1);
         }
 
-        try (final KafkaConsumer<String, StockData> consumer = new KafkaConsumer<>(properties)) {
+        try (final KafkaConsumer<String, JsonNode> consumer = new KafkaConsumer<>(properties)) {
             consumer.subscribe(Collections.singletonList(topicName));
+            logger.info("Starting to consume...");
             while (true) {
-                ConsumerRecords<String, StockData> records = consumer.poll(Duration.ofMillis(100));
-                for (ConsumerRecord<String, StockData> record : records) {
-                    System.out.println(record.value());
+                ConsumerRecords<String, JsonNode> records = consumer.poll(Duration.ofMillis(100));
+                try {
+                    for (ConsumerRecord<String, JsonNode> record : records)
+                        System.out.println(objectMapper.treeToValue(record.value(), StockData.class));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
                 }
             }
         }
