@@ -28,7 +28,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,14 +39,14 @@ public class TransactionalProducer {
 
     /**
      * private static method to read data from given dataFile
+     *
      * @param dataFile data file name in resource folder
      * @return List of StockData Instance
      * @throws IOException, NullPointerException
      */
     private static List<StockData> getStocks(String dataFile) throws IOException, NullPointerException {
 
-        URL fileURI = ClassLoader.class.getResource(dataFile);
-        File file = new File(fileURI.getFile());
+        File file = new File(dataFile);
         MappingIterator<StockData> stockDataIterator = new CsvMapper().readerWithTypedSchemaFor(StockData.class).readValues(file);
         return stockDataIterator.readAll();
     }
@@ -61,54 +60,53 @@ public class TransactionalProducer {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
 
-        final KafkaProducer<String, JsonNode> producer;
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<Thread> dispatchers = new ArrayList<>();
-        InputStream kafkaConfigStream;
+
 
         if (args.length != 4) {
             System.out.println("Please provide command line arguments: topicName1 topicName2 EventFile1 EventFile2");
             System.exit(-1);
         }
-
-        logger.info("Starting TransactionalProducer...");
-        String[] topicNames = Arrays.copyOfRange(args, 0,2);
+        String[] topicNames = Arrays.copyOfRange(args, 0, 2);
         String[] eventFiles = Arrays.copyOfRange(args, 2, 4);
         List<JsonNode>[] stockArrayOfList = new List[eventFiles.length];
-        for(int i=0;i<stockArrayOfList.length;i++){
-            stockArrayOfList[i]=new ArrayList<>();
+        for (int i = 0; i < stockArrayOfList.length; i++) {
+            stockArrayOfList[i] = new ArrayList<>();
         }
 
         logger.trace("Creating Kafka producer...");
         Properties properties = new Properties();
         try {
-            kafkaConfigStream = ClassLoader.class.getResourceAsStream(kafkaConfig);
+            InputStream kafkaConfigStream = ClassLoader.class.getResourceAsStream(kafkaConfig);
             properties.load(kafkaConfigStream);
             properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
             properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
-            properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG,"transaction_id-1");
+            properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "transaction_id-1");
 
         } catch (IOException e) {
             logger.error("Cannot open Kafka config " + kafkaConfig);
             System.exit(-1);
         }
-        producer = new KafkaProducer<>(properties);
+        KafkaProducer<String, JsonNode> producer = new KafkaProducer<>(properties);
         producer.initTransactions();
         producer.beginTransaction();
 
         //For each data file
-        for (int i = 0; i < eventFiles.length; i++) {
-            logger.info("Preparing data for " + eventFiles[i]);
-            try {
+        List<Thread> dispatchers = new ArrayList<>();
+        try {
+            for (int i = 0; i < eventFiles.length; i++) {
+                logger.info("Preparing data for " + eventFiles[i]);
                 for (StockData s : getStocks(eventFiles[i])) {
                     stockArrayOfList[i].add(objectMapper.valueToTree(s));
                 }
-
-            } catch (IOException | NullPointerException e) {
-                throw new RuntimeException("Cannot read data file. Skipping " + eventFiles[i] + "...",e);
+                dispatchers.add(new Thread(new Dispatcher(producer, topicNames[i], eventFiles[i], stockArrayOfList[i]), eventFiles[i]));
+                dispatchers.get(i).start();
             }
-            dispatchers.add(new Thread(new Dispatcher(producer, topicNames[i], eventFiles[i], stockArrayOfList[i]), eventFiles[i]));
-            dispatchers.get(i).start();
+        } catch (Exception e) {
+            logger.error("Cannot read data files");
+            producer.abortTransaction();
+            producer.close();
+            throw new RuntimeException(e);
         }
         //Wait for threads
         try {
@@ -123,7 +121,7 @@ public class TransactionalProducer {
             logger.error("Thread Interrupted " + e.getMessage());
         } finally {
             producer.close();
-            logger.info("Finished TransactionalProducer - Closing Kafka Producer.");
+            logger.info("Finished Application - Closing Kafka Producer.");
         }
 
     }

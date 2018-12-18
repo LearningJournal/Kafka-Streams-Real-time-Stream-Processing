@@ -21,8 +21,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.Scanner;
 
 /**
@@ -57,23 +55,19 @@ public class Dispatcher implements Runnable {
     @Override
     public void run() {
         logger.info("Start processing " + fileLocation + "...");
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL fileURI = classLoader.getResource(fileLocation);
-        if (fileURI == null) {
-            logger.error("Can't locate " + fileLocation);
-        } else {
-            File file = new File(fileURI.getFile());
-            int msgKey = 1;
-            try (Scanner scanner = new Scanner(file)) {
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    producer.send(new ProducerRecord<>(topicName, msgKey, line));
-                    msgKey++;
-                }
-                logger.trace("Finished sending " + msgKey + " messages from " + fileLocation);
-            } catch (FileNotFoundException e) {
-                logger.error("Failed to open " + fileLocation);
+        File file = new File(fileLocation);
+        int msgKey = 0;
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                producer.send(new ProducerRecord<>(topicName, msgKey, line));
+                msgKey++;
             }
+            logger.trace("Finished sending " + msgKey + " messages from " + fileLocation);
+        } catch (Exception e) {
+            logger.error("Exception in thread " + fileLocation);
+            throw new RuntimeException(e);
         }
     }
 }

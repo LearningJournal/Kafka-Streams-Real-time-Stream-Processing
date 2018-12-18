@@ -34,13 +34,13 @@ public class OddEvenPartitioner implements Partitioner {
      * Odd keys to partition 0
      * Even keys to partition 1
      *
-     * @param topic
-     * @param key
-     * @param keyBytes
-     * @param value
-     * @param valueBytes
-     * @param cluster
-     * @return
+     * @param topic topic Name
+     * @param key Message Key
+     * @param keyBytes Key Bytes
+     * @param value Message Value
+     * @param valueBytes Value Bytes
+     * @param cluster Cluster Object
+     * @return Partition Id
      */
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {

@@ -49,21 +49,17 @@ public class AvroConsumer {
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) {
-        final String topicName;
-        final String groupName;
-        InputStream kafkaConfigStream;
 
         if (args.length < 2) {
             System.out.println("Please provide command line arguments: topicName groupName");
             System.exit(-1);
         }
-        topicName = args[0];
-        groupName = args[1];
-        logger.info("Starting Kafka avro consumer...");
+        String topicName = args[0];
+        String groupName = args[1];
 
         Properties properties = new Properties();
         try {
-            kafkaConfigStream = ClassLoader.class.getResourceAsStream(kafkaConfig);
+            InputStream kafkaConfigStream = ClassLoader.class.getResourceAsStream(kafkaConfig);
             properties.load(kafkaConfigStream);
             properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupName);
             //Set autocommit to false so you can execute it again for the same set of messages
@@ -76,16 +72,15 @@ public class AvroConsumer {
 
         } catch (IOException e) {
             logger.error(e.getMessage());
-            System.exit(-1);
+            throw new RuntimeException(e);
         }
 
-        try (final KafkaConsumer<String, StockData> consumer = new KafkaConsumer<>(properties)) {
-            consumer.subscribe(Collections.singletonList(topicName));
-            while (true) {
-                ConsumerRecords<String, StockData> records = consumer.poll(Duration.ofMillis(100));
-                for (ConsumerRecord<String, StockData> record : records) {
-                    System.out.println(record.value());
-                }
+        final KafkaConsumer<String, StockData> consumer = new KafkaConsumer<>(properties);
+        consumer.subscribe(Collections.singletonList(topicName));
+        while (true) {
+            ConsumerRecords<String, StockData> records = consumer.poll(Duration.ofMillis(100));
+            for (ConsumerRecord<String, StockData> record : records) {
+                System.out.println(record.value());
             }
         }
     }

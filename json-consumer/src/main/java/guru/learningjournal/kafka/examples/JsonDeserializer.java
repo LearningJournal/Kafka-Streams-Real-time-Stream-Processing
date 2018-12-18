@@ -39,9 +39,9 @@ public class JsonDeserializer implements Deserializer<JsonNode> {
 
     /**
      * Deserialize to a JsonNode
-     * @param topic
-     * @param data
-     * @return
+     * @param topic topic name
+     * @param data message bytes
+     * @return JsonNode
      */
     @Override
     public JsonNode deserialize(String topic, byte[] data) {

@@ -3,4 +3,4 @@ This directory contains Kafka Producer example.
 
 The demo application takes following Program Arguments:
 
-`nse-bhav data/NSE05NOV2018BHAV.csv data/NSE06NOV2018BHAV.csv`
+`nse-bhav src/main/resources/data/NSE05NOV2018BHAV.csv src/main/resources/data/NSE06NOV2018BHAV.csv`
