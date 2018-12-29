@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.HadoopRecord",
+  "properties": {
+    "InvoiceNumber": {
+      "type": "string"
+    },
+    "CreatedTime": {
+      "javaType": "java.lang.Long",
+      "type": "object"
+    },
+    "StoreID": {
+      "type": "string"
+    },
+    "PosID": {
+      "type": "string"
+    },
+    "CustomerType": {
+      "type": "string"
+    },
+    "PaymentMethod": {
+      "type": "string"
+    },
+    "DeliveryType": {
+      "type": "string"
+    },
+    "City": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string"
+    },
+    "PinCode": {
+      "type": "string"
+    },
+    "ItemCode": {
+      "type": "string"
+    },
+    "ItemDescription": {
+      "type": "string"
+    },
+    "ItemPrice": {
+      "type": "number"
+    },
+    "ItemQty": {
+      "type": "integer"
+    },
+    "TotalValue": {
+      "type": "number"
+    }
+  }
+}
