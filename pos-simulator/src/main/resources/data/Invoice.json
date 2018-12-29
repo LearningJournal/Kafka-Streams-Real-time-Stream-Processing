@@ -2,7 +2,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4899",
+		"StoreID": "STR1534",
 		"PosID": "POS364",
 		"CashierID": "OAS898",
 		"CustomerType": "NONPRIME",
@@ -19,7 +19,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2699",
+		"StoreID": "STR1534",
 		"PosID": "POS135",
 		"CashierID": "OAS285",
 		"CustomerType": "PRIME",
@@ -36,7 +36,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1955",
+		"StoreID": "STR1534",
 		"PosID": "POS934",
 		"CashierID": "OAS544",
 		"CustomerType": "PRIME",
@@ -53,7 +53,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5864",
+		"StoreID": "STR1534",
 		"PosID": "POS944",
 		"CashierID": "OAS994",
 		"CustomerType": "NONPRIME",
@@ -70,7 +70,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7449",
+		"StoreID": "STR1534",
 		"PosID": "POS151",
 		"CashierID": "OAS177",
 		"CustomerType": "NONPRIME",
@@ -87,7 +87,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2629",
+		"StoreID": "STR1955",
 		"PosID": "POS992",
 		"CashierID": "OAS521",
 		"CustomerType": "NONPRIME",
@@ -104,7 +104,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7255",
+		"StoreID": "STR1955",
 		"PosID": "POS324",
 		"CashierID": "OAS183",
 		"CustomerType": "NONPRIME",
@@ -121,7 +121,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6347",
+		"StoreID": "STR1955",
 		"PosID": "POS769",
 		"CashierID": "OAS996",
 		"CustomerType": "PRIME",
@@ -138,7 +138,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6162",
+		"StoreID": "STR1955",
 		"PosID": "POS837",
 		"CashierID": "OAS861",
 		"CustomerType": "NONPRIME",
@@ -155,7 +155,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5646",
+		"StoreID": "STR1955",
 		"PosID": "POS493",
 		"CashierID": "OAS769",
 		"CustomerType": "PRIME",
@@ -172,7 +172,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6382",
+		"StoreID": "STR2629",
 		"PosID": "POS768",
 		"CashierID": "OAS282",
 		"CustomerType": "NONPRIME",
@@ -189,7 +189,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2952",
+		"StoreID": "STR2629",
 		"PosID": "POS285",
 		"CashierID": "OAS882",
 		"CustomerType": "NONPRIME",
@@ -206,7 +206,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9232",
+		"StoreID": "STR2629",
 		"PosID": "POS172",
 		"CashierID": "OAS622",
 		"CustomerType": "NONPRIME",
@@ -223,7 +223,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8311",
+		"StoreID": "STR2629",
 		"PosID": "POS647",
 		"CashierID": "OAS515",
 		"CustomerType": "PRIME",
@@ -240,7 +240,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8513",
+		"StoreID": "STR2629",
 		"PosID": "POS253",
 		"CashierID": "OAS737",
 		"CustomerType": "NONPRIME",
@@ -257,7 +257,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3781",
+		"StoreID": "STR2699",
 		"PosID": "POS832",
 		"CashierID": "OAS496",
 		"CustomerType": "NONPRIME",
@@ -274,7 +274,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7443",
+		"StoreID": "STR2699",
 		"PosID": "POS792",
 		"CashierID": "OAS152",
 		"CustomerType": "PRIME",
@@ -291,7 +291,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7262",
+		"StoreID": "STR2699",
 		"PosID": "POS773",
 		"CashierID": "OAS568",
 		"CustomerType": "NONPRIME",
@@ -308,7 +308,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5494",
+		"StoreID": "STR2699",
 		"PosID": "POS779",
 		"CashierID": "OAS161",
 		"CustomerType": "PRIME",
@@ -325,7 +325,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7188",
+		"StoreID": "STR2699",
 		"PosID": "POS566",
 		"CashierID": "OAS318",
 		"CustomerType": "PRIME",
@@ -342,7 +342,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8868",
+		"StoreID": "STR2952",
 		"PosID": "POS152",
 		"CashierID": "OAS329",
 		"CustomerType": "PRIME",
@@ -359,7 +359,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1534",
+		"StoreID": "STR2952",
 		"PosID": "POS351",
 		"CashierID": "OAS841",
 		"CustomerType": "NONPRIME",
@@ -376,7 +376,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2196",
+		"StoreID": "STR2952",
 		"PosID": "POS477",
 		"CashierID": "OAS259",
 		"CustomerType": "NONPRIME",
@@ -393,7 +393,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3721",
+		"StoreID": "STR2952",
 		"PosID": "POS471",
 		"CashierID": "OAS936",
 		"CustomerType": "NONPRIME",
@@ -410,7 +410,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7381",
+		"StoreID": "STR2952",
 		"PosID": "POS663",
 		"CashierID": "OAS444",
 		"CustomerType": "NONPRIME",
@@ -427,7 +427,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5818",
+		"StoreID": "STR3781",
 		"PosID": "POS843",
 		"CashierID": "OAS685",
 		"CustomerType": "NONPRIME",
@@ -444,7 +444,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6874",
+		"StoreID": "STR3781",
 		"PosID": "POS444",
 		"CashierID": "OAS935",
 		"CustomerType": "NONPRIME",
@@ -461,7 +461,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1835",
+		"StoreID": "STR3781",
 		"PosID": "POS129",
 		"CashierID": "OAS311",
 		"CustomerType": "PRIME",
@@ -478,7 +478,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2222",
+		"StoreID": "STR3781",
 		"PosID": "POS494",
 		"CashierID": "OAS377",
 		"CustomerType": "PRIME",
@@ -495,7 +495,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7664",
+		"StoreID": "STR3781",
 		"PosID": "POS978",
 		"CashierID": "OAS981",
 		"CustomerType": "NONPRIME",
@@ -512,7 +512,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4845",
+		"StoreID": "STR4899",
 		"PosID": "POS584",
 		"CashierID": "OAS452",
 		"CustomerType": "NONPRIME",
@@ -529,7 +529,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9414",
+		"StoreID": "STR4899",
 		"PosID": "POS447",
 		"CashierID": "OAS729",
 		"CustomerType": "NONPRIME",
@@ -546,7 +546,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5784",
+		"StoreID": "STR4899",
 		"PosID": "POS441",
 		"CashierID": "OAS487",
 		"CustomerType": "NONPRIME",
@@ -563,7 +563,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4217",
+		"StoreID": "STR4899",
 		"PosID": "POS799",
 		"CashierID": "OAS145",
 		"CustomerType": "PRIME",
@@ -580,7 +580,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2842",
+		"StoreID": "STR4899",
 		"PosID": "POS954",
 		"CashierID": "OAS151",
 		"CustomerType": "NONPRIME",
@@ -597,7 +597,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6975",
+		"StoreID": "STR5494",
 		"PosID": "POS384",
 		"CashierID": "OAS398",
 		"CustomerType": "NONPRIME",
@@ -614,7 +614,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3584",
+		"StoreID": "STR5494",
 		"PosID": "POS121",
 		"CashierID": "OAS237",
 		"CustomerType": "PRIME",
@@ -631,7 +631,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9122",
+		"StoreID": "STR5494",
 		"PosID": "POS353",
 		"CashierID": "OAS969",
 		"CustomerType": "NONPRIME",
@@ -648,7 +648,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1118",
+		"StoreID": "STR5494",
 		"PosID": "POS759",
 		"CashierID": "OAS796",
 		"CustomerType": "NONPRIME",
@@ -665,7 +665,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9976",
+		"StoreID": "STR5494",
 		"PosID": "POS722",
 		"CashierID": "OAS576",
 		"CustomerType": "PRIME",
@@ -682,7 +682,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1558",
+		"StoreID": "STR5646",
 		"PosID": "POS968",
 		"CashierID": "OAS689",
 		"CustomerType": "PRIME",
@@ -699,7 +699,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1688",
+		"StoreID": "STR5646",
 		"PosID": "POS639",
 		"CashierID": "OAS167",
 		"CustomerType": "PRIME",
@@ -716,7 +716,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6378",
+		"StoreID": "STR5646",
 		"PosID": "POS624",
 		"CashierID": "OAS196",
 		"CustomerType": "PRIME",
@@ -733,7 +733,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6367",
+		"StoreID": "STR5646",
 		"PosID": "POS212",
 		"CashierID": "OAS284",
 		"CustomerType": "NONPRIME",
@@ -750,7 +750,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3388",
+		"StoreID": "STR5646",
 		"PosID": "POS543",
 		"CashierID": "OAS921",
 		"CustomerType": "NONPRIME",
@@ -767,7 +767,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7449",
+		"StoreID": "STR5864",
 		"PosID": "POS132",
 		"CashierID": "OAS386",
 		"CustomerType": "NONPRIME",
@@ -784,7 +784,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5573",
+		"StoreID": "STR5864",
 		"PosID": "POS945",
 		"CashierID": "OAS649",
 		"CustomerType": "PRIME",
@@ -801,7 +801,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5395",
+		"StoreID": "STR5864",
 		"PosID": "POS465",
 		"CashierID": "OAS582",
 		"CustomerType": "NONPRIME",
@@ -818,7 +818,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7299",
+		"StoreID": "STR5864",
 		"PosID": "POS872",
 		"CashierID": "OAS287",
 		"CustomerType": "PRIME",
@@ -835,7 +835,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4436",
+		"StoreID": "STR5864",
 		"PosID": "POS878",
 		"CashierID": "OAS219",
 		"CustomerType": "NONPRIME",
@@ -852,7 +852,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9635",
+		"StoreID": "STR6162",
 		"PosID": "POS835",
 		"CashierID": "OAS583",
 		"CustomerType": "NONPRIME",
@@ -869,7 +869,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4956",
+		"StoreID": "STR6162",
 		"PosID": "POS279",
 		"CashierID": "OAS964",
 		"CustomerType": "PRIME",
@@ -886,7 +886,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7515",
+		"StoreID": "STR6162",
 		"PosID": "POS987",
 		"CashierID": "OAS795",
 		"CustomerType": "NONPRIME",
@@ -903,7 +903,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9733",
+		"StoreID": "STR6162",
 		"PosID": "POS868",
 		"CashierID": "OAS172",
 		"CustomerType": "NONPRIME",
@@ -920,7 +920,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8582",
+		"StoreID": "STR6162",
 		"PosID": "POS431",
 		"CashierID": "OAS139",
 		"CustomerType": "NONPRIME",
@@ -937,7 +937,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9583",
+		"StoreID": "STR6347",
 		"PosID": "POS622",
 		"CashierID": "OAS793",
 		"CustomerType": "PRIME",
@@ -954,7 +954,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3976",
+		"StoreID": "STR6347",
 		"PosID": "POS927",
 		"CashierID": "OAS186",
 		"CustomerType": "NONPRIME",
@@ -971,7 +971,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1222",
+		"StoreID": "STR6347",
 		"PosID": "POS994",
 		"CashierID": "OAS274",
 		"CustomerType": "PRIME",
@@ -988,7 +988,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2736",
+		"StoreID": "STR6347",
 		"PosID": "POS333",
 		"CashierID": "OAS697",
 		"CustomerType": "NONPRIME",
@@ -1005,7 +1005,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3882",
+		"StoreID": "STR6347",
 		"PosID": "POS856",
 		"CashierID": "OAS128",
 		"CustomerType": "NONPRIME",
@@ -1022,7 +1022,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6511",
+		"StoreID": "STR6382",
 		"PosID": "POS661",
 		"CashierID": "OAS597",
 		"CustomerType": "PRIME",
@@ -1039,7 +1039,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6394",
+		"StoreID": "STR6382",
 		"PosID": "POS145",
 		"CashierID": "OAS872",
 		"CustomerType": "PRIME",
@@ -1056,7 +1056,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1826",
+		"StoreID": "STR6382",
 		"PosID": "POS265",
 		"CashierID": "OAS328",
 		"CustomerType": "PRIME",
@@ -1073,7 +1073,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2445",
+		"StoreID": "STR6382",
 		"PosID": "POS968",
 		"CashierID": "OAS687",
 		"CustomerType": "PRIME",
@@ -1090,7 +1090,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3671",
+		"StoreID": "STR6382",
 		"PosID": "POS851",
 		"CashierID": "OAS351",
 		"CustomerType": "NONPRIME",
@@ -1107,7 +1107,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5587",
+		"StoreID": "STR7188",
 		"PosID": "POS682",
 		"CashierID": "OAS394",
 		"CustomerType": "NONPRIME",
@@ -1124,7 +1124,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2885",
+		"StoreID": "STR7188",
 		"PosID": "POS198",
 		"CashierID": "OAS199",
 		"CustomerType": "PRIME",
@@ -1141,7 +1141,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5528",
+		"StoreID": "STR7188",
 		"PosID": "POS956",
 		"CashierID": "OAS134",
 		"CustomerType": "PRIME",
@@ -1158,7 +1158,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9189",
+		"StoreID": "STR7188",
 		"PosID": "POS664",
 		"CashierID": "OAS971",
 		"CustomerType": "PRIME",
@@ -1175,7 +1175,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2974",
+		"StoreID": "STR7188",
 		"PosID": "POS825",
 		"CashierID": "OAS329",
 		"CustomerType": "PRIME",
@@ -1192,7 +1192,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR3126",
+		"StoreID": "STR7255",
 		"PosID": "POS626",
 		"CashierID": "OAS437",
 		"CustomerType": "PRIME",
@@ -1209,7 +1209,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2178",
+		"StoreID": "STR7255",
 		"PosID": "POS115",
 		"CashierID": "OAS634",
 		"CustomerType": "PRIME",
@@ -1226,7 +1226,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8239",
+		"StoreID": "STR7255",
 		"PosID": "POS866",
 		"CashierID": "OAS244",
 		"CustomerType": "PRIME",
@@ -1243,7 +1243,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7936",
+		"StoreID": "STR7255",
 		"PosID": "POS692",
 		"CashierID": "OAS812",
 		"CustomerType": "NONPRIME",
@@ -1260,7 +1260,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6224",
+		"StoreID": "STR7255",
 		"PosID": "POS738",
 		"CashierID": "OAS349",
 		"CustomerType": "NONPRIME",
@@ -1277,7 +1277,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1395",
+		"StoreID": "STR7262",
 		"PosID": "POS581",
 		"CashierID": "OAS742",
 		"CustomerType": "NONPRIME",
@@ -1294,7 +1294,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6396",
+		"StoreID": "STR7262",
 		"PosID": "POS576",
 		"CashierID": "OAS819",
 		"CustomerType": "NONPRIME",
@@ -1311,7 +1311,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6339",
+		"StoreID": "STR7262",
 		"PosID": "POS664",
 		"CashierID": "OAS536",
 		"CustomerType": "NONPRIME",
@@ -1328,7 +1328,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5216",
+		"StoreID": "STR7262",
 		"PosID": "POS733",
 		"CashierID": "OAS959",
 		"CustomerType": "PRIME",
@@ -1345,7 +1345,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2317",
+		"StoreID": "STR7262",
 		"PosID": "POS182",
 		"CashierID": "OAS538",
 		"CustomerType": "PRIME",
@@ -1362,7 +1362,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "1570745999",
-		"StoreID": "STR1636",
+		"StoreID": "STR7443",
 		"PosID": "POS411",
 		"CashierID": "OAS936",
 		"CustomerType": "NONPRIME",
@@ -1379,7 +1379,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9959",
+		"StoreID": "STR7443",
 		"PosID": "POS365",
 		"CashierID": "OAS845",
 		"CustomerType": "PRIME",
@@ -1396,7 +1396,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR7313",
+		"StoreID": "STR7443",
 		"PosID": "POS394",
 		"CashierID": "OAS813",
 		"CustomerType": "NONPRIME",
@@ -1413,7 +1413,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6194",
+		"StoreID": "STR7443",
 		"PosID": "POS333",
 		"CashierID": "OAS883",
 		"CustomerType": "NONPRIME",
@@ -1430,7 +1430,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5423",
+		"StoreID": "STR7443",
 		"PosID": "POS388",
 		"CashierID": "OAS436",
 		"CustomerType": "PRIME",
@@ -1447,7 +1447,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8924",
+		"StoreID": "STR7449",
 		"PosID": "POS351",
 		"CashierID": "OAS487",
 		"CustomerType": "NONPRIME",
@@ -1464,7 +1464,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1651",
+		"StoreID": "STR7449",
 		"PosID": "POS923",
 		"CashierID": "OAS748",
 		"CustomerType": "NONPRIME",
@@ -1481,7 +1481,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8586",
+		"StoreID": "STR7449",
 		"PosID": "POS423",
 		"CashierID": "OAS733",
 		"CustomerType": "PRIME",
@@ -1498,7 +1498,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1774",
+		"StoreID": "STR7449",
 		"PosID": "POS215",
 		"CashierID": "OAS663",
 		"CustomerType": "PRIME",
@@ -1515,7 +1515,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR9835",
+		"StoreID": "STR7449",
 		"PosID": "POS728",
 		"CashierID": "OAS323",
 		"CustomerType": "PRIME",
@@ -1532,7 +1532,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8649",
+		"StoreID": "STR8311",
 		"PosID": "POS975",
 		"CashierID": "OAS881",
 		"CustomerType": "NONPRIME",
@@ -1549,7 +1549,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR6336",
+		"StoreID": "STR8311",
 		"PosID": "POS377",
 		"CashierID": "OAS478",
 		"CustomerType": "NONPRIME",
@@ -1566,7 +1566,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR2895",
+		"StoreID": "STR8311",
 		"PosID": "POS728",
 		"CashierID": "OAS852",
 		"CustomerType": "PRIME",
@@ -1583,7 +1583,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR8624",
+		"StoreID": "STR8311",
 		"PosID": "POS935",
 		"CashierID": "OAS755",
 		"CustomerType": "NONPRIME",
@@ -1600,7 +1600,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5274",
+		"StoreID": "STR8311",
 		"PosID": "POS224",
 		"CashierID": "OAS399",
 		"CustomerType": "NONPRIME",
@@ -1617,7 +1617,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4518",
+		"StoreID": "STR8513",
 		"PosID": "POS881",
 		"CashierID": "OAS354",
 		"CustomerType": "NONPRIME",
@@ -1634,7 +1634,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4572",
+		"StoreID": "STR8513",
 		"PosID": "POS155",
 		"CashierID": "OAS558",
 		"CustomerType": "NONPRIME",
@@ -1651,7 +1651,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR5668",
+		"StoreID": "STR8513",
 		"PosID": "POS582",
 		"CashierID": "OAS212",
 		"CustomerType": "PRIME",
@@ -1668,7 +1668,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR1451",
+		"StoreID": "STR8513",
 		"PosID": "POS163",
 		"CashierID": "OAS961",
 		"CustomerType": "PRIME",
@@ -1685,7 +1685,7 @@
 	{
 		"InvoiceNumber": 0,
 		"CreatedTime": "0",
-		"StoreID": "STR4472",
+		"StoreID": "STR8513",
 		"PosID": "POS311",
 		"CashierID": "OAS845",
 		"CustomerType": "NONPRIME",
