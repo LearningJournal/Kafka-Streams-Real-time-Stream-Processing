@@ -23,6 +23,7 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,28 +46,46 @@ public class PosFanOutApp {
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, FanOutConfigs.applicationID);
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, FanOutConfigs.bootstrapServers);
+
         StreamsBuilder builder = new StreamsBuilder();
-        KStream KS1 = builder.stream(FanOutConfigs.posTopicName,
+        KStream KS0 = builder.stream(FanOutConfigs.posTopicName,
                 Consumed.with(Serdes.String(), JsonSerdes.PosInvoice()));
 
         //Requirement 1 - Produce to shipment
-        KStream KS2 = KS1.filter((Predicate<String, PosInvoice>) (key, value) ->
-                value.getDeliveryType().equalsIgnoreCase(FanOutConfigs.DELIVERY_TYPE_HOME_DELIVERY));
-        KS2.to(FanOutConfigs.shipmentTopicName, Produced.with(Serdes.String(), JsonSerdes.PosInvoice()));
+        KStream KS1 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
+                value.getDeliveryType()
+                        .equalsIgnoreCase(FanOutConfigs.DELIVERY_TYPE_HOME_DELIVERY));
+
+        KS1.to(FanOutConfigs.shipmentTopicName,
+                Produced.with(Serdes.String(), JsonSerdes.PosInvoice()));
 
         //Requirement 2 - Produce to loyalty
-        KStream KS3 = KS1.filter((Predicate<String, PosInvoice>) (key, value) ->
-                value.getCustomerType().equalsIgnoreCase(FanOutConfigs.CUSTOMER_TYPE_PRIME));
-        KStream KS4 = KS3.mapValues((ValueMapper<PosInvoice, Notification>) RecordBuilder::getNotification);
-        KS4.to(FanOutConfigs.notificationTopic, Produced.with(Serdes.String(), JsonSerdes.Notification()));
+        KStream KS3 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
+                value.getCustomerType()
+                        .equalsIgnoreCase(FanOutConfigs.CUSTOMER_TYPE_PRIME));
+
+        KStream KS4 = KS3.mapValues((ValueMapper<PosInvoice, Notification>)
+                RecordBuilder::getNotification);
+
+        KS4.to(FanOutConfigs.notificationTopic,
+                Produced.with(Serdes.String(), JsonSerdes.Notification()));
 
         //Requirement 3 - Produce to Hadoop
-        KStream KS5 = KS1.mapValues((ValueMapper<PosInvoice, PosInvoice>) RecordBuilder::getMaskedInvoice);
-        KStream KS6 = KS5.flatMapValues((ValueMapper<PosInvoice, Iterable<HadoopRecord>>) RecordBuilder::getHadoopRecords);
-        KS6.to(FanOutConfigs.hadoopTopic, Produced.with(Serdes.String(), JsonSerdes.HadoopRecord()));
+        KStream KS6 = KS0.mapValues((ValueMapper<PosInvoice, PosInvoice>)
+                RecordBuilder::getMaskedInvoice);
 
-        logger.info("Starting the stream topology");
-        KafkaStreams myStream = new KafkaStreams(builder.build(), props);
+        KStream KS7 = KS6.flatMapValues((ValueMapper<PosInvoice, Iterable<HadoopRecord>>)
+                RecordBuilder::getHadoopRecords);
+
+        KS7.to(FanOutConfigs.hadoopTopic,
+                Produced.with(Serdes.String(), JsonSerdes.HadoopRecord()));
+
+        Topology posFanOutTopology = builder.build();
+
+        logger.info("Starting the following topology");
+        logger.info(posFanOutTopology.describe().toString());
+
+        KafkaStreams myStream = new KafkaStreams(posFanOutTopology, props);
         myStream.start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

@@ -46,7 +46,6 @@ public class JsonSerdes {
         Map<String, Object> invoiceSerdeConfigs = new HashMap<>();
         invoiceSerdeConfigs.put("specific.class.name", PosInvoice.class);
         invoiceDeserializer.configure(invoiceSerdeConfigs, false);
-        //Serde<PosInvoice> invoiceSerde = Serdes.serdeFrom(invoiceSerializer, invoiceDeserializer);
         return Serdes.serdeFrom(invoiceSerializer, invoiceDeserializer);
     }
 
