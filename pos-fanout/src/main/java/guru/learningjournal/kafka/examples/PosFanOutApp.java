@@ -15,11 +15,9 @@
 
 package guru.learningjournal.kafka.examples;
 
-import guru.learningjournal.kafka.examples.serde.JsonSerdes;
 import guru.learningjournal.kafka.examples.types.HadoopRecord;
 import guru.learningjournal.kafka.examples.types.Notification;
 import guru.learningjournal.kafka.examples.types.PosInvoice;
-import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
@@ -49,7 +47,7 @@ public class PosFanOutApp {
 
         StreamsBuilder builder = new StreamsBuilder();
         KStream KS0 = builder.stream(FanOutConfigs.posTopicName,
-                Consumed.with(Serdes.String(), JsonSerdes.PosInvoice()));
+                Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice()));
 
         //Requirement 1 - Produce to shipment
         KStream KS1 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
@@ -57,9 +55,9 @@ public class PosFanOutApp {
                         .equalsIgnoreCase(FanOutConfigs.DELIVERY_TYPE_HOME_DELIVERY));
 
         KS1.to(FanOutConfigs.shipmentTopicName,
-                Produced.with(Serdes.String(), JsonSerdes.PosInvoice()));
+                Produced.with(PosSerdes.String(), PosSerdes.PosInvoice()));
 
-        //Requirement 2 - Produce to loyalty
+        //Requirement 2 - Produce to loyaltyHadoopRecord
         KStream KS3 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
                 value.getCustomerType()
                         .equalsIgnoreCase(FanOutConfigs.CUSTOMER_TYPE_PRIME));
@@ -68,7 +66,7 @@ public class PosFanOutApp {
                 RecordBuilder::getNotification);
 
         KS4.to(FanOutConfigs.notificationTopic,
-                Produced.with(Serdes.String(), JsonSerdes.Notification()));
+                Produced.with(PosSerdes.String(), PosSerdes.Notification()));
 
         //Requirement 3 - Produce to Hadoop
         KStream KS6 = KS0.mapValues((ValueMapper<PosInvoice, PosInvoice>)
@@ -78,7 +76,7 @@ public class PosFanOutApp {
                 RecordBuilder::getHadoopRecords);
 
         KS7.to(FanOutConfigs.hadoopTopic,
-                Produced.with(Serdes.String(), JsonSerdes.HadoopRecord()));
+                Produced.with(PosSerdes.String(), PosSerdes.HadoopRecord()));
 
         Topology posFanOutTopology = builder.build();
 
