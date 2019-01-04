@@ -1,5 +1,5 @@
 # Kafka Streams : Real-time Stream Processing!
-This is the central repository for all the materials related to <em>Kafka Streams : Real-time Stream Processing!</em> Book by Prashant Pandey. 
+This is the central repository for all the materials related to <em>Kafka Streams : Real-time Stream Processing!</em> <br>Book by Prashant Pandey. 
 <div>
 
 <a href="https://www.learningjournal.guru/ebook/kafka-streams-real-time-stream-processing/">
