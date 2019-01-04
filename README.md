@@ -18,4 +18,9 @@ Kafka Streams: Real-time Stream Processing! is written for software engineers wi
 <p align="justify">
  This book is based on Kafka Streams library available in Apache Kafka 2.0. All the source code and examples in this book are tested on Apache Kafka 2.0 open source distribution.
 </p>
+<h2> Table of Contents </h2>
+<ul>
+<li>Chapter 1 - Dawn of Bigdata</li>
+<li>Chapter 2 - Real-time Streams</li>
+</ul>
 </div>
