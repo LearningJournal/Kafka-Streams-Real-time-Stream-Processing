@@ -1,0 +1,1 @@
+Generate Java Objects from Avro Schema Definition
