@@ -1,0 +1,52 @@
+{"namespace": "guru.learningjournal.kafka.examples.types",
+  "type": "record",
+  "name": "PosInvoice",
+  "fields": [
+    {"name": "InvoiceNumber", "type": ["null", "string"]},
+    {"name": "CreatedTime",  "type":["null", "long"]},
+    {"name": "StoreID",  "type": ["null", "string"]},
+    {"name": "PosID",  "type": ["null", "string"]},
+    {"name": "CashierID",  "type": ["null", "string"]},
+    {"name": "CustomerType",  "type": ["null", "string"]},
+    {"name": "CustomerCardNo",  "type": ["null", "string"]},
+    {"name": "TotalAmount",  "type": ["null", "double"]},
+    {"name": "NumberOfItems",  "type": ["null", "int"]},
+    {"name": "PaymentMethod",  "type": ["null", "string"]},
+    {"name": "TaxableAmount",  "type": ["null", "double"]},
+    {"name": "CGST",  "type": ["null", "double"]},
+    {"name": "SGST",  "type": ["null", "double"]},
+    {"name": "CESS",  "type": ["null", "double"]},
+    {"name": "DeliveryType",  "type": ["null", "string"]},
+    {"name": "DeliveryAddress",
+      "type": ["null",
+        {"type": "record",
+          "name": "DeliveryAddress",
+          "fields":[
+            {"name": "AddressLine", "type": ["null", "string"]},
+            {"name": "City", "type": ["null", "string"]},
+            {"name": "State", "type": ["null", "string"]},
+            {"name": "PinCode", "type": ["null", "string"]},
+            {"name": "ContactNumber", "type": ["null", "string"]}
+          ]
+        }
+      ]
+    },
+    {"name": "InvoiceLineItems",
+      "type" :["null",
+        {"type": "array",
+          "items" : {
+            "type": "record",
+            "name": "PosLineItem",
+            "fields": [
+              {"name": "ItemCode", "type": ["null", "string"]},
+              {"name": "ItemDescription", "type": ["null", "string"]},
+              {"name": "ItemPrice", "type": ["null", "double"]},
+              {"name": "ItemQty", "type": ["null", "int"]},
+              {"name": "TotalValue", "type": ["null", "double"]}
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
