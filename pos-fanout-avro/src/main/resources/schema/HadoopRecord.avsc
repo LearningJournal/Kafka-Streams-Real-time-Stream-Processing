@@ -1,0 +1,21 @@
+{"namespace": "guru.learningjournal.kafka.examples.types",
+  "type": "record",
+  "name": "HadoopRecord",
+  "fields": [
+    {"name": "InvoiceNumber", "type": ["null", "string"]},
+    {"name": "CreatedTime",  "type":["null", "long"]},
+    {"name": "StoreID",  "type": ["null", "string"]},
+    {"name": "PosID",  "type": ["null", "string"]},
+    {"name": "CustomerType",  "type": ["null", "string"]},
+    {"name": "PaymentMethod",  "type": ["null", "string"]},
+    {"name": "DeliveryType",  "type": ["null", "string"]},
+    {"name": "City",  "type": ["null", "string"]},
+    {"name": "State",  "type": ["null", "string"]},
+    {"name": "PinCode",  "type": ["null", "string"]},
+    {"name": "ItemCode",  "type": ["null", "string"]},
+    {"name": "ItemDescription",  "type": ["null", "string"]},
+    {"name": "ItemPrice",  "type": ["null", "double"]},
+    {"name": "ItemQty",  "type": ["null", "int"]},
+    {"name": "TotalValue",  "type": ["null", "double"]}
+  ]
+}
