@@ -1,1 +1,1 @@
-kafka-console-producer.bat --broker-list localhost:9092 --topic word-count
+kafka-console-producer.bat --broker-list localhost:9092 --topic streaming-word-count

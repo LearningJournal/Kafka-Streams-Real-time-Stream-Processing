@@ -19,6 +19,7 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.kstream.KGroupedStream;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
 
@@ -32,25 +33,27 @@ public class StreamingWordCount {
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "StreamingWordCount");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(StreamsConfig.STATE_DIR_CONFIG,"state-store");
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 
+        System.out.println("Start Reading Messages");
+        StreamsBuilder streamBuilder = new StreamsBuilder();
 
-        final StreamsBuilder builder = new StreamsBuilder();
+        KStream<String, String> KS0 = streamBuilder.stream("streaming-word-count");
 
-        final KStream<String, String> sourceStream = builder.stream("word-count");
+        KStream<String, String> KS1 = KS0.flatMapValues(value ->
+                Arrays.asList(value.toLowerCase().split(" ")));
 
-        final KTable<String, Long> counts = sourceStream
-                .flatMapValues(value -> Arrays.asList(value.toLowerCase().split(" ")))
-                .groupBy((key, value) -> value)
-                .count();
+        KGroupedStream<String,String> KS2 = KS1.groupBy((key, value) -> value);
 
-        counts.toStream().foreach((k, v) -> System.out.println("Key = " + k + " Value = " + v));
+        KTable<String,Long> KS3 = KS2.count();
 
-        final KafkaStreams streams = new KafkaStreams(builder.build(), props);
+        KS3.toStream().foreach((k, v) ->
+                System.out.println("Key = " + k + " Value = " + v.toString()));
 
+        KafkaStreams streams = new KafkaStreams(streamBuilder.build(), props);
         streams.start();
-
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
     }
 }

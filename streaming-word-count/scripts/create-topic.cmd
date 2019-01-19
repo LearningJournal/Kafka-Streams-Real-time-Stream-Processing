@@ -1,1 +1,1 @@
-kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic word-count --config min.insync.replicas=2
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic streaming-word-count --config min.insync.replicas=2
