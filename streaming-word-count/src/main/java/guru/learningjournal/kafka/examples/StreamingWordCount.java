@@ -22,6 +22,7 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KGroupedStream;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.KeyValueMapper;
 
 import java.util.Arrays;
 import java.util.Properties;
@@ -29,27 +30,28 @@ import java.util.Properties;
 public class StreamingWordCount {
 
     public static void main(final String[] args) {
-
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "StreamingWordCount");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(StreamsConfig.STATE_DIR_CONFIG,"state-store");
-        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        props.put(StreamsConfig.STATE_DIR_CONFIG, "state-store");
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG,
+                Serdes.String().getClass().getName());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG,
+                Serdes.String().getClass().getName());
 
         System.out.println("Start Reading Messages");
         StreamsBuilder streamBuilder = new StreamsBuilder();
-
-        KStream<String, String> KS0 = streamBuilder.stream("streaming-word-count");
+        KStream<String, String> KS0 = streamBuilder.stream(
+                "streaming-word-count");
 
         KStream<String, String> KS1 = KS0.flatMapValues(value ->
                 Arrays.asList(value.toLowerCase().split(" ")));
 
-        KGroupedStream<String,String> KS2 = KS1.groupBy((key, value) -> value);
+        KGroupedStream<String,String> KGS2 = KS1.groupBy((key, value) -> value);
 
-        KTable<String,Long> KS3 = KS2.count();
+        KTable<String, Long> KTS3 = KGS2.count();
 
-        KS3.toStream().foreach((k, v) ->
+        KTS3.toStream().foreach((k, v) ->
                 System.out.println("Key = " + k + " Value = " + v.toString()));
 
         KafkaStreams streams = new KafkaStreams(streamBuilder.build(), props);
@@ -57,3 +59,4 @@ public class StreamingWordCount {
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
     }
 }
+
