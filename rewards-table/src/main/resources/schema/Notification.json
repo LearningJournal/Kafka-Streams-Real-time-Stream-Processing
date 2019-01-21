@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.Notification",
+  "properties": {
+    "InvoiceNumber": {
+      "type": "string"
+    },
+    "CustomerCardNo": {
+      "type": "string"
+    },
+    "TotalAmount": {
+      "type": "number"
+    },
+    "EarnedLoyaltyPoints": {
+      "type": "number"
+    },
+    "TotalLoyaltyPoints": {
+      "type": "number"
+    }
+  }
+}
