@@ -33,7 +33,7 @@ Kafka Streams: Real-time Stream Processing! is written for software engineers wi
 <li>Chapter 11 - Creating Topology</li>
 <li>Chapter 12 - Types and Serialization</li>
 <li>Chapter 13 - States and Stores</li>
-<li>Chapter 14 - Streams and Tables</li>
+<li>Chapter 14 - Aggregates and Tables</li>
 <li>Chapter 15 - Stateful Operations</li>
 <li>Chapter 16 - Unit Testing Kafka Streams</li>
 <li>Chapter 17 - Streams Architecture</li>
