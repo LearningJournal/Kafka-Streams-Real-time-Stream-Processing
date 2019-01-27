@@ -1,9 +1,10 @@
 # Leave entire .idea folder
 */.idea/*
 
-# Leave kafka_logs and zookeeper_data
+# Leave kafka_logs and zookeeper_data and state store
 *kafka_logs*
 *zookeeper_data*
+*state-store*
 
 # Leave target directory
 */target/*

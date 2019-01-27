@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.DepartmentAggregate",
+  "properties": {
+    "total_salary": {
+      "type": "integer"
+    },
+    "employee_count": {
+      "type": "integer"
+    },
+    "avg_salary": {
+      "type": "number"
+    }
+  }
+}
