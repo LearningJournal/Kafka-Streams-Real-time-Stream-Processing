@@ -64,6 +64,7 @@ public class KStreamAggDemo {
                 //Serializer
                 Materialized.<String, DepartmentAggregate,
                         KeyValueStore<Bytes, byte[]>>as("agg-store")
+                        .withKeySerde(AppSerdes.String())
                         .withValueSerde(AppSerdes.DepartmentAggregate())
         );
 
