@@ -1,0 +1,97 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.PosInvoice",
+  "properties": {
+    "InvoiceNumber": {
+      "type": "string"
+    },
+    "CreatedTime": {
+      "javaType": "java.lang.Long",
+      "type": "object"
+    },
+    "StoreID": {
+      "type": "string"
+    },
+    "PosID": {
+      "type": "string"
+    },
+    "CashierID": {
+      "type": "string"
+    },
+    "CustomerType": {
+      "type": "string"
+    },
+    "CustomerCardNo": {
+      "type": "string"
+    },
+    "TotalAmount": {
+      "type": "number"
+    },
+    "NumberOfItems": {
+      "type": "integer"
+    },
+    "PaymentMethod": {
+      "type": "string"
+    },
+    "TaxableAmount": {
+      "type": "number"
+    },
+    "CGST": {
+      "type": "number"
+    },
+    "SGST": {
+      "type": "number"
+    },
+    "CESS": {
+      "type": "number"
+    },
+    "DeliveryType": {
+      "type": "string"
+    },
+    "DeliveryAddress": {
+      "type": "object",
+      "javaType": "guru.learningjournal.kafka.examples.types.DeliveryAddress",
+      "properties": {
+        "AddressLine": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "PinCode": {
+          "type": "string"
+        },
+        "ContactNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "InvoiceLineItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "javaType": "guru.learningjournal.kafka.examples.types.PosLineItem",
+        "properties": {
+          "ItemCode": {
+            "type": "string"
+          },
+          "ItemDescription": {
+            "type": "string"
+          },
+          "ItemPrice": {
+            "type": "number"
+          },
+          "ItemQty": {
+            "type": "integer"
+          },
+          "TotalValue": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
