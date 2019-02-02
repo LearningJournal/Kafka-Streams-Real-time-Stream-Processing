@@ -56,15 +56,15 @@ public class KStreamAggDemo {
                         .withEmployeeCount(0)
                         .withTotalSalary(0)
                         .withAvgSalary(0D),
-                //Adder
-                (k, v, aggV) -> {
-                    Double avgSalary = (aggV.getTotalSalary() + v.getSalary()) / (aggV.getEmployeeCount() + 1D);
-                    return new DepartmentAggregate()
-                            .withEmployeeCount(aggV.getEmployeeCount() + 1)
-                            .withTotalSalary(aggV.getTotalSalary() + v.getSalary())
-                            .withAvgSalary(avgSalary);
-                },
-                Materialized.<String, DepartmentAggregate, KeyValueStore<Bytes, byte[]>>as("agg-store")
+                //Aggregator
+                (k, v, aggV) -> new DepartmentAggregate()
+                        .withEmployeeCount(aggV.getEmployeeCount() + 1)
+                        .withTotalSalary(aggV.getTotalSalary() + v.getSalary())
+                        .withAvgSalary((aggV.getTotalSalary() + v.getSalary()) / (aggV.getEmployeeCount() + 1D)),
+                //Serializer
+                Materialized.<String, DepartmentAggregate,
+                        KeyValueStore<Bytes, byte[]>>as("agg-store")
+                        .withKeySerde(AppSerdes.String())
                         .withValueSerde(AppSerdes.DepartmentAggregate())
         );
 
