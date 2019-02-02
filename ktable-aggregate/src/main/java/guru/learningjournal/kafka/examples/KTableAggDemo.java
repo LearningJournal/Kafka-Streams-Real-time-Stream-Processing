@@ -45,10 +45,8 @@ public class KTableAggDemo {
                 Consumed.with(AppSerdes.String(), AppSerdes.Employee()));
 
         KGroupedTable<String, Employee> KGS1 = KS0.groupBy(
-                (k, v) ->
-                        KeyValue.pair(v.getDepartment(), v),
-                Serialized.with(AppSerdes.String(),
-                        AppSerdes.Employee()));
+                (k, v) -> KeyValue.pair(v.getDepartment(), v),
+                Serialized.with(AppSerdes.String(), AppSerdes.Employee()));
 
         KTable<String, DepartmentAggregate> KT2 = KGS1.aggregate(
                 //Initializer
@@ -57,22 +55,19 @@ public class KTableAggDemo {
                         .withTotalSalary(0)
                         .withAvgSalary(0D),
                 //Adder
-                (k, v, aggV) -> {
-                    Double avgSalary = (aggV.getTotalSalary() + v.getSalary()) / (aggV.getEmployeeCount() + 1D);
-                    return new DepartmentAggregate()
-                            .withEmployeeCount(aggV.getEmployeeCount() + 1)
-                            .withTotalSalary(aggV.getTotalSalary() + v.getSalary())
-                            .withAvgSalary(avgSalary);
-                },
+                (k, v, aggV) -> new DepartmentAggregate()
+                        .withEmployeeCount(aggV.getEmployeeCount() + 1)
+                        .withTotalSalary(aggV.getTotalSalary() + v.getSalary())
+                        .withAvgSalary((aggV.getTotalSalary() + v.getSalary())
+                                / (aggV.getEmployeeCount() + 1D)),
                 //subtractor
-                (k, v, aggV) -> {
-                    Double avgSalary = (aggV.getTotalSalary() - v.getSalary()) / (aggV.getEmployeeCount() - 1D);
-                    return new DepartmentAggregate()
-                            .withEmployeeCount(aggV.getEmployeeCount() - 1)
-                            .withTotalSalary(aggV.getTotalSalary() - v.getSalary())
-                            .withAvgSalary(avgSalary);
-                },
-                Materialized.<String, DepartmentAggregate, KeyValueStore<Bytes, byte[]>>as("dept-agg-store")
+                (k, v, aggV) -> new DepartmentAggregate()
+                        .withEmployeeCount(aggV.getEmployeeCount() - 1)
+                        .withTotalSalary(aggV.getTotalSalary() - v.getSalary())
+                        .withAvgSalary((aggV.getTotalSalary() - v.getSalary())
+                                / (aggV.getEmployeeCount() - 1D)),
+                Materialized.<String, DepartmentAggregate, KeyValueStore<Bytes,
+                        byte[]>>as("dept-agg-store")
                         .withValueSerde(AppSerdes.DepartmentAggregate())
         );
 
