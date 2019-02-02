@@ -26,11 +26,11 @@ import org.apache.kafka.streams.processor.TimestampExtractor;
  * @author www.learningjournal.guru
  */
 
-public class InvoiceTimeExtractor implements TimestampExtractor {
+    public class InvoiceTimeExtractor implements TimestampExtractor {
 
-    @Override
-    public long extract(ConsumerRecord<Object, Object> consumerRecord, long prevTime) {
-        PosInvoice invoice = (PosInvoice) consumerRecord.value();
-        return ((invoice.getCreatedTime() > 0) ? invoice.getCreatedTime() : prevTime);
+        @Override
+        public long extract(ConsumerRecord<Object, Object> consumerRecord, long prevTime) {
+            PosInvoice invoice = (PosInvoice) consumerRecord.value();
+            return ((invoice.getCreatedTime() > 0) ? invoice.getCreatedTime() : prevTime);
+        }
     }
-}

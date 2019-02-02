@@ -31,8 +31,8 @@ import java.util.Properties;
 
 /**
  * Demo Timestamp Extractor
- * Execute with default timestamp extractor once
- * Uncomment and use InvoiceTimeExtractor to see the difference
+ * Comment withTimestampExtractor and execute with default timestamp extractor once
+ * Uncomment withTimestampExtractor and use InvoiceTimeExtractor to see the difference
  *
  * @author prashant
  * @author www.learningjournal.guru
@@ -49,7 +49,7 @@ public class TimeCheckDemo {
         StreamsBuilder streamsBuilder = new StreamsBuilder();
         KStream<String, PosInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
                 Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice())
-                //.withTimestampExtractor(new InvoiceTimeExtractor())
+                        .withTimestampExtractor(new InvoiceTimeExtractor())
         );
 
         KS0.transformValues(() -> new ValueTransformer<PosInvoice, PosInvoice>() {
