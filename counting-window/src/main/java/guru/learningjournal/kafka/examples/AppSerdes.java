@@ -15,10 +15,9 @@
 
 package guru.learningjournal.kafka.examples;
 
-
 import guru.learningjournal.kafka.examples.serde.JsonDeserializer;
 import guru.learningjournal.kafka.examples.serde.JsonSerializer;
-import guru.learningjournal.kafka.examples.types.PosInvoice;
+import guru.learningjournal.kafka.examples.types.SimpleInvoice;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 
@@ -31,21 +30,20 @@ import java.util.Map;
  * @author prashant
  * @author www.learningjournal.guru
  */
+class AppSerdes extends Serdes {
 
-class PosSerdes extends Serdes {
 
-
-    static final class PosInvoiceSerde extends WrapperSerde<PosInvoice> {
+    static final class PosInvoiceSerde extends WrapperSerde<SimpleInvoice> {
         PosInvoiceSerde() {
             super(new JsonSerializer<>(), new JsonDeserializer<>());
         }
     }
 
-    static Serde<PosInvoice> PosInvoice() {
+    static Serde<SimpleInvoice> SimpleInvoice() {
         PosInvoiceSerde serde = new PosInvoiceSerde();
 
         Map<String, Object> serdeConfigs = new HashMap<>();
-        serdeConfigs.put("specific.class.name", PosInvoice.class);
+        serdeConfigs.put("specific.class.name", SimpleInvoice.class);
         serde.configure(serdeConfigs, false);
 
         return serde;

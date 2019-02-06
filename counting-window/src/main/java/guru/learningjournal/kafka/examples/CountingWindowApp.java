@@ -15,20 +15,22 @@
 
 package guru.learningjournal.kafka.examples;
 
-import guru.learningjournal.kafka.examples.types.PosInvoice;
+import guru.learningjournal.kafka.examples.types.SimpleInvoice;
+import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.*;
+import org.apache.kafka.streams.state.WindowStore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Properties;
 
-//These features are only available in 2.1
-//Check 2.1 branch
+//These features are only available in 2.1, Checkout 2.1 branch
 //import static org.apache.kafka.streams.kstream.Suppressed.BufferConfig.unbounded;
 //import static org.apache.kafka.streams.kstream.Suppressed.untilWindowCloses;
 
@@ -48,39 +50,48 @@ public class CountingWindowApp {
         props.put(StreamsConfig.STATE_DIR_CONFIG, AppConfigs.stateStoreName);
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
-        KStream<String, PosInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
-                Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice())
+        KStream<String, SimpleInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
+                Consumed.with(AppSerdes.String(), AppSerdes.SimpleInvoice())
                         .withTimestampExtractor(new InvoiceTimeExtractor())
         );
 
-        KGroupedStream<String, PosInvoice> KS1 = KS0.groupByKey(
-                Serialized.with(PosSerdes.String(),
-                        PosSerdes.PosInvoice()));
+        KGroupedStream<String, SimpleInvoice> KS1 = KS0.groupByKey(
+                Serialized.with(AppSerdes.String(),
+                        AppSerdes.SimpleInvoice()));
 
-        TimeWindowedKStream<String, PosInvoice> KS2 = KS1.windowedBy(
-                TimeWindows.of(Duration.ofSeconds(30).toMillis())
+        TimeWindowedKStream<String, SimpleInvoice> KS2 = KS1.windowedBy(
+                TimeWindows.of(Duration.ofMinutes(5).toMillis())
                 //Grace period is only available in 2.1 - Check 2.1 Branch for details
                 //.grace(Duration.ofMillis(100))
         );
 
-        KTable<Windowed<String>, Long> KT3 = KS2.count();
-        //Suppress is only available in 2.1 - Check 2.1 branch for details
+        KTable<Windowed<String>, Long> KT3 = KS2.count(
+                //Materialized is not needed if you don't want to override defaults
+                Materialized.<String, Long, WindowStore<Bytes, byte[]>>as("invoice-count")
+                //Retention is only available in 2.1, Checkout 2.1 branch
+                //.withRetention(Duration.ofHours(6))
+        );
+
+        //Suppress is only available in 2.1, Checkout 2.1 branch
         //.suppress(untilWindowCloses(unbounded()));
 
 
         KT3.toStream().foreach(
-                (kWindowed, v) -> logger.info("Window start: " +
-                        new Timestamp(kWindowed.window().start()) +
-                        " Window end: " +
-                        new Timestamp(kWindowed.window().end()) +
-                        " Key: " +
-                        kWindowed.key() +
-                        " Count: " + v
+                (kWindowed, v) -> logger.info(
+                        "StoreID: " + kWindowed.key() +
+                                " Window start: " +
+                                Instant.ofEpochMilli(kWindowed.window().start())
+                                        .atOffset(ZoneOffset.UTC) +
+                                " Window end: " +
+                                Instant.ofEpochMilli(kWindowed.window().end())
+                                        .atOffset(ZoneOffset.UTC) +
+                                " Count: " + v +
+                                " Window#: " + kWindowed.window().hashCode()
+
                 ));
 
         KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         streams.start();
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
-
     }
 }

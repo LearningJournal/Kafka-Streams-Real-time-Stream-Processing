@@ -15,7 +15,7 @@
 
 package guru.learningjournal.kafka.examples;
 
-import guru.learningjournal.kafka.examples.types.PosInvoice;
+import guru.learningjournal.kafka.examples.types.SimpleInvoice;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.streams.processor.TimestampExtractor;
 
@@ -30,7 +30,7 @@ import org.apache.kafka.streams.processor.TimestampExtractor;
 
         @Override
         public long extract(ConsumerRecord<Object, Object> consumerRecord, long prevTime) {
-            PosInvoice invoice = (PosInvoice) consumerRecord.value();
+            SimpleInvoice invoice = (SimpleInvoice) consumerRecord.value();
             return ((invoice.getCreatedTime() > 0) ? invoice.getCreatedTime() : prevTime);
         }
     }
