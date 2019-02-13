@@ -23,6 +23,11 @@
     <artifactId>hello-producer</artifactId>
     <version>2.0.0</version>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <kafka.version>2.1.0</kafka.version>
+    </properties>
+
     <build>
         <plugins>
             <!-- Maven Compiler Plugin-->
@@ -31,8 +36,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -43,41 +48,16 @@
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>2.0.0</version>
+            <version>${kafka.version}</version>
         </dependency>
-        <!-- Apache Kafka Streams-->
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-streams</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+
         <!-- Apache Log4J2 binding for SLF4J -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!-- JUnit5 Jupiter -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.3.1</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- JUnit 5 Jupiter Engine -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.3.1</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- JUnit 5 Jupiter Parameterized Testing -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.3.1</version>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
 </project>

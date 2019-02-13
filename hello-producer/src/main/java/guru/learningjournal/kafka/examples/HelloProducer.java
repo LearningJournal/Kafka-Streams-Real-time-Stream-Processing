@@ -15,6 +15,7 @@
 
 package guru.learningjournal.kafka.examples;
 
+import guru.learningjournal.kafka.examples.common.AppConfigs;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -34,37 +35,23 @@ import java.util.Properties;
 public class HelloProducer {
     private static final Logger logger = LogManager.getLogger(HelloProducer.class);
 
-    /**
-     * Applications entry point
-     *
-     * @param args topicName (name of the Kafka topic) numEvents (# of messages)
-     */
     public static void main(String[] args) {
-
-        if (args.length != 2) {
-            System.out.println("Please provide command line arguments: topicName numEvents");
-            System.exit(-1);
-        }
-
-        String topicName = args[0];
-        int numEvents = Integer.valueOf(args[1]);
-        logger.debug("topicName=" + topicName + ", numEvents=" + numEvents);
 
         logger.info("Creating Kafka Producer...");
         Properties props = new Properties();
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, "HelloProducer");
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093");
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, AppConfigs.applicationID);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         KafkaProducer<Integer, String> producer = new KafkaProducer<>(props);
 
         logger.info("Start sending messages...");
-        for (int i = 1; i <= numEvents; i++) {
-            producer.send(new ProducerRecord<>(topicName, i, "Simple Message-" + i));
+        for (int i = 1; i <= AppConfigs.numEvents; i++) {
+            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Simple Message-" + i));
         }
 
-        logger.info("Finished HelloProducer - Closing Kafka Producer.");
+        logger.info("Finished - Closing Kafka Producer.");
         producer.close();
 
     }
