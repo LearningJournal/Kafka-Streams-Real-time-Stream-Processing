@@ -25,39 +25,43 @@ import java.util.Map;
 
 /**
  * Json Serializer
+ *
+ * @author prashant
+ * @author www.learningjournal.guru
  */
 public class JsonSerializer implements Serializer<JsonNode> {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public JsonSerializer(){
+    public JsonSerializer() {
 
     }
 
     @Override
-    public void configure(Map<String, ?> config, boolean isKey){
+    public void configure(Map<String, ?> config, boolean isKey) {
         //Nothing to Configure
     }
 
     /**
      * Serialize JsonNode
+     *
      * @param topic Kafka topic name
-     * @param data data as JsonNode
+     * @param data  data as JsonNode
      * @return byte[]
      */
     @Override
-    public byte[] serialize(String topic, JsonNode data){
-        if(data==null){
+    public byte[] serialize(String topic, JsonNode data) {
+        if (data == null) {
             return null;
         }
         try {
             return objectMapper.writeValueAsBytes(data);
-        }catch (JsonProcessingException e){
-            throw new SerializationException("Error serializing JSON message",e);
+        } catch (JsonProcessingException e) {
+            throw new SerializationException("Error serializing JSON message", e);
         }
     }
 
     @Override
-    public void close(){
+    public void close() {
 
     }
 }
