@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.PaymentRequest",
+  "properties": {
+    "TransactionID": {
+      "type": "string"
+    },
+    "CreatedTime": {
+      "javaType": "java.lang.Long"
+    },
+    "SourceAccountID": {
+      "type": "string"
+    },
+    "TargetAccountID": {
+      "type": "string"
+    },
+    "Amount": {
+      "type": "number"
+    },
+    "OTP": {
+      "type": "string"
+    }
+  }
+}
