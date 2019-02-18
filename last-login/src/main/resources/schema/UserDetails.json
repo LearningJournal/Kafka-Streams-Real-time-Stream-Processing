@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.UserDetails",
+  "properties": {
+    "UserName": {
+      "type": "string"
+    },
+    "LoginID": {
+      "type": "string"
+    },
+    "LastLogin": {
+      "javaType": "java.lang.Long"
+    }
+  }
+}
