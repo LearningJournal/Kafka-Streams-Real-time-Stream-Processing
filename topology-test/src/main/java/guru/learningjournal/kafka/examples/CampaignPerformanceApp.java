@@ -37,7 +37,7 @@ public class CampaignPerformanceApp {
         properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,
             AppConfigs.bootstrapServers);
         properties.put(StreamsConfig.STATE_DIR_CONFIG,
-            AppConfigs.stateStoreName);
+            AppConfigs.stateStoreLocation);
 
         StreamsBuilder builder = new StreamsBuilder();
         AppTopology.withBuilder(builder);

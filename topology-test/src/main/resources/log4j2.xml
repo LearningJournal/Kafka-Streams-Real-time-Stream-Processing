@@ -17,7 +17,7 @@
 <Configuration status="ERROR">
     <Appenders>
         <Console name="stdout" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d] (%c) - %p %m %n"/>
+            <PatternLayout pattern="[%d](%c) %p - %m%n"/>
         </Console>
     </Appenders>
     <Loggers>
@@ -31,6 +31,9 @@
             <AppenderRef ref="stdout"/>
         </Logger>
         <Logger name="org.apache.kafka.streams.processor.internals.StateDirectory" level="off" additivity="false">
+            <AppenderRef ref="stdout"/>
+        </Logger>
+        <Logger name="org.apache.kafka.test.TestUtils" level="off" additivity="false">
             <AppenderRef ref="stdout"/>
         </Logger>
 

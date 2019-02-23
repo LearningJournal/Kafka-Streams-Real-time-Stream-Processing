@@ -26,6 +26,7 @@ import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyTestDriver;
+import org.apache.kafka.streams.state.KeyValueStore;
 import org.apache.kafka.streams.test.ConsumerRecordFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,6 +44,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author prashant
  * @author www.learningjournal.guru
  */
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AppTopologyTest {
 
     private static TopologyTestDriver topologyTestDriver;
@@ -56,7 +59,7 @@ class AppTopologyTest {
         properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,
             AppConfigs.bootstrapServers);
         properties.put(StreamsConfig.STATE_DIR_CONFIG,
-            AppConfigs.stateStoreNameUT);
+            AppConfigs.stateStoreLocationUT);
 
         StreamsBuilder builder = new StreamsBuilder();
         AppTopology.withBuilder(builder);
@@ -67,7 +70,8 @@ class AppTopologyTest {
 
 
     @Test
-    @DisplayName("Send first Impression for 'ABC Ltd' and validate flow")
+    @Order(1)
+    @DisplayName("Send first Impression for 'ABC Ltd' and validate the flow")
     void testImpressionFlow() {
 
         AdImpression adImpression = new AdImpression()
@@ -98,7 +102,8 @@ class AppTopologyTest {
     }
 
     @Test
-    @DisplayName("Send second Impression for 'ABC Ltd' and validate count")
+    @Order(2)
+    @DisplayName("Send second Impression for 'ABC Ltd' and validate the count")
     void testImpressionCount() {
 
         AdImpression adImpression = new AdImpression()
@@ -129,7 +134,8 @@ class AppTopologyTest {
     }
 
     @Test
-    @DisplayName("Send first click for 'ABC Ltd' and validate count")
+    @Order(3)
+    @DisplayName("Send first click for 'ABC Ltd' and validate the count")
     void testClicks() {
         AdClick adClick = new AdClick()
             .withImpressionID("100001")
@@ -160,6 +166,23 @@ class AppTopologyTest {
         );
     }
 
+    @Test
+    @Order(4)
+    @DisplayName("Check current state store values and validate end state")
+    void testStateStore(){
+        KeyValueStore<String,CampaignPerformance> store =
+            topologyTestDriver.getKeyValueStore(
+            AppConfigs.stateStoreNameCP);
+
+        CampaignPerformance cpValue =  store.get("ABC Ltd");
+        logger.info(cpValue);
+
+        assertAll(() -> assertEquals("ABC Ltd", cpValue.getCampaigner()),
+            () -> assertEquals("2", cpValue.getAdImpressions().toString()),
+            () -> assertEquals("1", cpValue.getAdClicks().toString())
+        );
+    }
+
     @AfterAll
     static void tearDown() throws IOException {
         //topologyTestDriver.close() throwing error on windows 10 - Refer KAFKA-6647
@@ -167,7 +190,7 @@ class AppTopologyTest {
         try {
             topologyTestDriver.close();
         } catch (Exception e) {
-            FileUtils.deleteDirectory(new File(AppConfigs.stateStoreNameUT));
+            FileUtils.deleteDirectory(new File(AppConfigs.stateStoreLocationUT));
         }
     }
 }

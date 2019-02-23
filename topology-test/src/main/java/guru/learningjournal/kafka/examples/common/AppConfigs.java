@@ -28,6 +28,7 @@ public class AppConfigs {
     public final static String impressionTopic = "ad-impressions";
     public final static String clicksTopic = "ad-clicks";
     public final static String outputTopic = "campaign-performance";
-    public final static String stateStoreName = "logs/state-store";
-    public final static String stateStoreNameUT = "logs-ut/state-store";
+    public final static String stateStoreLocation = "logs/state-store";
+    public final static String stateStoreLocationUT = "logs-ut/state-store";
+    public final static String stateStoreNameCP = "cp-store";
 }

@@ -60,8 +60,8 @@ class AppTopology {
                     .withAdClicks(clkCount))
                 .mapValues((k, v) -> v.withCampaigner(k),
                     Materialized.<String, CampaignPerformance, KeyValueStore<Bytes, byte[]>>
-                        as("cp-store").
-                        withKeySerde(AppSerdes.String())
+                        as(AppConfigs.stateStoreNameCP)
+                        .withKeySerde(AppSerdes.String())
                         .withValueSerde(AppSerdes.CampaignPerformance()));
 
         campaignPerformance.toStream().to(
