@@ -73,7 +73,7 @@ public class Top3NewsTypesDemo {
         KStream<String, AdInventories> clickedInventoryKStream =
             clicksKStream.join(
                 adInventoriesGlobalKTable,
-                (gtKey, gtValue) -> gtKey,
+                (clickKey, clickValue) -> clickKey,
                 (adClick, adInventory) -> adInventory
             );
 

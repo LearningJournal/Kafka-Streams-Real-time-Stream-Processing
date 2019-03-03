@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "javaType": "guru.learningjournal.kafka.examples.types.TableMap",
+  "properties": {
+    "TargetTable": {
+      "type": "string"
+    }
+  }
+}

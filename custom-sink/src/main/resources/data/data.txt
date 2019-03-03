@@ -1,0 +1,16 @@
+Data for topic1
+----------------
+{"rowID": "101", "name": "Prashant", "department": "engineering", "salary": "5000"}
+{"rowID": "102", "name": "John", "department": "accounts", "salary": "8000"}
+{"rowID": "103", "name": "Abdul", "department": "support", "salary": "7000"}
+
+Data for Topic2
+----------------
+{"rowID": "501", "name": "ABC Ltd", "city": "Bangalore"}
+{"rowID": "502", "name": "XYZ Ltd", "city": "London"}
+{"rowID": "503", "name": "JKL LLC", "city": "New York City"}
+
+Data for topic-table-map
+--------------------------
+topic1:{"TargetTable": "employee"}
+topic2:{"TargetTable": "customers"}

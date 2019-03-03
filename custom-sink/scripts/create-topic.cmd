@@ -1,0 +1,1 @@
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic topic1 & kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic topic2 & kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic table-map
