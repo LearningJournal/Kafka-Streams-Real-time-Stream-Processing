@@ -1,5 +1,6 @@
 # Leave entire .idea folder
 */.idea/*
+*/*.iml
 
 # Leave kafka_logs and zookeeper_data and state store
 *kafka_logs*
