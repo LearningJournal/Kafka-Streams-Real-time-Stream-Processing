@@ -1,0 +1,1 @@
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic training-feed --property print.key=true --property key.separator=":"
