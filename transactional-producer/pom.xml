@@ -21,11 +21,11 @@
 
     <groupId>guru.learningjournal.kafka.examples</groupId>
     <artifactId>transactional-producer</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 
     <properties>
         <java.version>1.8</java.version>
-        <kafka.version>2.0.0</kafka.version>
+        <kafka.version>2.1.1</kafka.version>
         <junit.version>5.3.1</junit.version>
     </properties>
 
@@ -70,12 +70,7 @@
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
         </dependency>
-        <!-- Apache Kafka Streams-->
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-streams</artifactId>
-            <version>${kafka.version}</version>
-        </dependency>
+
         <!-- Apache Log4J2 binding for SLF4J -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -97,27 +92,6 @@
             <version>2.6</version>
         </dependency>
 
-        <!-- JUnit5 Jupiter -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- JUnit 5 Jupiter Engine -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- JUnit 5 Jupiter Parameterized Testing -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>
