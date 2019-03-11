@@ -19,6 +19,8 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.Topology;
+import org.apache.kafka.streams.kstream.KStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +34,7 @@ import java.util.Properties;
  */
 public class HelloStreams {
     private static final Logger logger = LogManager.getLogger();
+    private static final String topicName = "hello-producer";
 
     /**
      * Application entry point
@@ -40,13 +43,6 @@ public class HelloStreams {
      */
 
     public static void main(String[] args) {
-        String topicName;
-
-        if (args.length != 1) {
-            System.out.println("Please provide command line arguments: topicName");
-            System.exit(-1);
-        }
-        topicName = args[0];
 
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "HelloStreams");
@@ -55,10 +51,12 @@ public class HelloStreams {
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
 
         StreamsBuilder builder = new StreamsBuilder();
-        builder.<Integer, String>stream(topicName)
-                .foreach((k, v) -> System.out.println("Key = " + k + " Value = " + v));
+        KStream<Integer, String> kStream = builder.stream(topicName);
+        kStream.foreach((k, v) -> System.out.println("Key = " + k + " Value = " + v));
+        //kStream.peek((k, v) -> System.out.println("Key = " + k + " Value = " + v));
+        Topology topology = builder.build();
 
-        KafkaStreams streams = new KafkaStreams(builder.build(), props);
+        KafkaStreams streams = new KafkaStreams(topology, props);
 
         logger.info("Starting the stream");
         streams.start();
