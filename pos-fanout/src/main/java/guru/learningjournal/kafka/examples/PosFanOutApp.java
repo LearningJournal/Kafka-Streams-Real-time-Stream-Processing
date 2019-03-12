@@ -35,7 +35,6 @@ import java.util.*;
  * @author www.learningjournal.guru
  */
 
-@SuppressWarnings("unchecked")
 public class PosFanOutApp {
     private static final Logger logger = LogManager.getLogger();
 
@@ -46,37 +45,40 @@ public class PosFanOutApp {
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, FanOutConfigs.bootstrapServers);
 
         StreamsBuilder builder = new StreamsBuilder();
-        KStream KS0 = builder.stream(FanOutConfigs.posTopicName,
-                Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice()));
+        KStream<String, PosInvoice> KS0 = builder.stream(FanOutConfigs.posTopicName,
+            Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice()));
 
         //Requirement 1 - Produce to shipment
-        KStream KS1 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
-                value.getDeliveryType()
-                        .equalsIgnoreCase(FanOutConfigs.DELIVERY_TYPE_HOME_DELIVERY));
+        KStream<String, PosInvoice> KS1 = KS0.filter((key, value) ->
+            value.getDeliveryType()
+                .equalsIgnoreCase(FanOutConfigs.DELIVERY_TYPE_HOME_DELIVERY));
 
         KS1.to(FanOutConfigs.shipmentTopicName,
-                Produced.with(PosSerdes.String(), PosSerdes.PosInvoice()));
+            Produced.with(PosSerdes.String(), PosSerdes.PosInvoice()));
 
         //Requirement 2 - Produce to loyaltyHadoopRecord
-        KStream KS3 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
-                value.getCustomerType()
-                        .equalsIgnoreCase(FanOutConfigs.CUSTOMER_TYPE_PRIME));
+        KStream<String, PosInvoice> KS3 = KS0.filter((key, value) ->
+            value.getCustomerType()
+                .equalsIgnoreCase(FanOutConfigs.CUSTOMER_TYPE_PRIME));
 
-        KStream KS4 = KS3.mapValues((ValueMapper<PosInvoice, Notification>)
-                RecordBuilder::getNotification);
+        KStream<String, Notification> KS4 = KS3.mapValues(
+            invoice -> RecordBuilder.getNotification(invoice)
+        );
 
         KS4.to(FanOutConfigs.notificationTopic,
-                Produced.with(PosSerdes.String(), PosSerdes.Notification()));
+            Produced.with(PosSerdes.String(), PosSerdes.Notification()));
 
         //Requirement 3 - Produce to Hadoop
-        KStream KS6 = KS0.mapValues((ValueMapper<PosInvoice, PosInvoice>)
-                RecordBuilder::getMaskedInvoice);
+        KStream<String, PosInvoice> KS6 = KS0.mapValues(
+            invoice -> RecordBuilder.getMaskedInvoice(invoice)
+        );
 
-        KStream KS7 = KS6.flatMapValues((ValueMapper<PosInvoice, Iterable<HadoopRecord>>)
-                RecordBuilder::getHadoopRecords);
+        KStream<String, HadoopRecord> KS7 = KS6.flatMapValues(
+            invoice -> RecordBuilder.getHadoopRecords(invoice)
+        );
 
         KS7.to(FanOutConfigs.hadoopTopic,
-                Produced.with(PosSerdes.String(), PosSerdes.HadoopRecord()));
+            Produced.with(PosSerdes.String(), PosSerdes.HadoopRecord()));
 
         Topology posFanOutTopology = builder.build();
 
