@@ -1,1 +1,0 @@
-Generate Java Objects from JSON Schema Definition
