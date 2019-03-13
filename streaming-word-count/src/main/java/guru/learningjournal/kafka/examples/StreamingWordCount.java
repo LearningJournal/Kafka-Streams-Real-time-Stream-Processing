@@ -22,37 +22,37 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KGroupedStream;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.KeyValueMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.Properties;
 
 public class StreamingWordCount {
+    private static final Logger logger = LogManager.getLogger();
 
     public static void main(final String[] args) {
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "StreamingWordCount");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(StreamsConfig.STATE_DIR_CONFIG, "state-store");
-        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG,
-                Serdes.String().getClass().getName());
-        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG,
-                Serdes.String().getClass().getName());
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 
-        System.out.println("Start Reading Messages");
+        logger.info("Start Reading Messages");
         StreamsBuilder streamBuilder = new StreamsBuilder();
-        KStream<String, String> KS0 = streamBuilder.stream(
-                "streaming-word-count");
+        KStream<String, String> KS0 = streamBuilder.stream("streaming-word-count");
 
         KStream<String, String> KS1 = KS0.flatMapValues(value ->
-                Arrays.asList(value.toLowerCase().split(" ")));
+            Arrays.asList(value.toLowerCase().split(" ")));
 
-        KGroupedStream<String,String> KGS2 = KS1.groupBy((key, value) -> value);
+        KGroupedStream<String, String> KGS2 = KS1.groupBy((key, value) -> value);
 
         KTable<String, Long> KTS3 = KGS2.count();
 
-        KTS3.toStream().foreach((k, v) ->
-                System.out.println("Key = " + k + " Value = " + v.toString()));
+        KTS3.toStream().peek(
+            (k, v) -> logger.info("Key = " + k + " Value = " + v.toString())
+        );
 
         KafkaStreams streams = new KafkaStreams(streamBuilder.build(), props);
         streams.start();

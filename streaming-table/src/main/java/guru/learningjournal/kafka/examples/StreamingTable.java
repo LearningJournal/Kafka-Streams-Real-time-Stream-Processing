@@ -66,7 +66,7 @@ public class StreamingTable {
         KTable<String, String> KT1 = KT0.filter((key, value) -> key.contains("HDFCBANK"));
 
         KStream<String, String> KS2 = KT1.toStream();
-        KS2.foreach((k, v) -> System.out.println("Key = " + k + " Value = " + v));
+        KS2.peek((k, v) -> System.out.println("Key = " + k + " Value = " + v));
 
         KafkaStreams streams = new KafkaStreams(streamBuilder.build(), props);
         streams.start();
