@@ -5,6 +5,7 @@
 *kafka_logs*
 *zookeeper_data*
 *state-store*
+*/logs/*
 
 # Leave target directory
 */target/*
