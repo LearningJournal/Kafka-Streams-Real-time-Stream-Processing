@@ -1,0 +1,1 @@
+kafka-console-producer.bat --broker-list localhost:9092 --topic person-age  --property parse.key=true --property key.separator=":"

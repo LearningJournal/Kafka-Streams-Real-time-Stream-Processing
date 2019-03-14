@@ -15,6 +15,7 @@
 
 package guru.learningjournal.kafka.examples;
 
+import guru.learningjournal.kafka.examples.types.Notification;
 import guru.learningjournal.kafka.examples.types.PosInvoice;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.*;
@@ -29,7 +30,6 @@ import java.util.Properties;
  * @author prashant
  * @author www.learningjournal.guru
  */
-@SuppressWarnings("unchecked")
 public class RewardsApp {
     private static final Logger logger = LogManager.getLogger();
 
@@ -40,28 +40,43 @@ public class RewardsApp {
         props.put(StreamsConfig.STATE_DIR_CONFIG, "state-store");
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
-        KStream KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
-                Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice()));
+        KStream<String, PosInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
+            Consumed.with(PosSerdes.String(), PosSerdes.PosInvoice()));
 
-        KStream KS1 = KS0.filter((Predicate<String, PosInvoice>) (key, value) ->
-                value.getCustomerType().equalsIgnoreCase(AppConfigs.CUSTOMER_TYPE_PRIME));
-
-        KStream KS2 = KS1.map(Notifications.notificationMapper());
-
-        KGroupedStream KGS3 = KS2.groupByKey(
-                Serialized.with(PosSerdes.String(),
-                        PosSerdes.Notification())
+        KStream<String, PosInvoice> KS1 = KS0.filter(
+            (key, value) -> value.getCustomerType().equalsIgnoreCase(AppConfigs.CUSTOMER_TYPE_PRIME)
         );
 
-        KTable KTS4 = KGS3.reduce(Notifications.sumRewards());
+        KStream<String, Notification> KS2 = KS1.map(
+            (key, invoice) -> new KeyValue<>(
+                invoice.getCustomerCardNo(),
+                Notifications.getNotificationFrom(invoice)
+            )
+        );
+
+        KGroupedStream<String, Notification> KGS3 = KS2.groupByKey(
+            Grouped.with(
+                PosSerdes.String(),
+                PosSerdes.Notification()
+            )
+        );
+
+        KTable<String, Notification> KTS4 = KGS3.reduce(
+            (aggValue, newValue) -> {
+                newValue.setTotalLoyaltyPoints(newValue.getEarnedLoyaltyPoints() +
+                    aggValue.getTotalLoyaltyPoints());
+                return newValue;
+            }
+        );
 
         KTS4.toStream().to(AppConfigs.notificationTopic,
-                Produced.with(PosSerdes.String(), PosSerdes.Notification())
+            Produced.with(
+                PosSerdes.String(),
+                PosSerdes.Notification())
         );
 
-        Topology posFanOutTopology = streamsBuilder.build();
         logger.info("Starting Kafka Streams");
-        KafkaStreams myStream = new KafkaStreams(posFanOutTopology, props);
+        KafkaStreams myStream = new KafkaStreams(streamsBuilder.build(), props);
         myStream.start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

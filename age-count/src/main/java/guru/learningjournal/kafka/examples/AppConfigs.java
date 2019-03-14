@@ -15,25 +15,16 @@
 
 package guru.learningjournal.kafka.examples;
 
-
-import guru.learningjournal.kafka.examples.types.Notification;
-import guru.learningjournal.kafka.examples.types.PosInvoice;
-
 /**
- * Utility class for Notification
+ * Application Config
  *
  * @author prashant
  * @author www.learningjournal.guru
  */
+class AppConfigs {
 
-class Notifications {
-
-    static Notification getNotificationFrom(PosInvoice invoice) {
-        return new Notification()
-            .withInvoiceNumber(invoice.getInvoiceNumber())
-            .withCustomerCardNo(invoice.getCustomerCardNo())
-            .withTotalAmount(invoice.getTotalAmount())
-            .withEarnedLoyaltyPoints(invoice.getTotalAmount() * AppConfigs.LOYALTY_FACTOR)
-            .withTotalLoyaltyPoints(invoice.getTotalAmount() * AppConfigs.LOYALTY_FACTOR);
-    }
+    final static String applicationID = "AgeCountDemo";
+    final static String bootstrapServers = "localhost:9092";
+    final static String topicName = "person-age";
+    final static String stateStoreLocation = "logs/state-store";
 }
