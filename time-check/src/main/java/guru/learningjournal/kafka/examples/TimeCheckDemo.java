@@ -23,6 +23,7 @@ import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.ValueTransformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
+import org.apache.kafka.streams.processor.WallclockTimestampExtractor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,6 +46,8 @@ public class TimeCheckDemo {
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, AppConfigs.applicationID);
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
+
+
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
         KStream<String, PosInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,

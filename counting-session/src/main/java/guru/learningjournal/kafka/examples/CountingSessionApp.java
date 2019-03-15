@@ -39,9 +39,9 @@ public class CountingSessionApp {
 
     private static String utcTimeString(Long timestamp) {
         return DateTimeFormatter.ISO_DATE_TIME
-                .format(Instant.ofEpochMilli(timestamp)
-                        .atZone(ZoneOffset.UTC)
-                );
+            .format(Instant.ofEpochMilli(timestamp)
+                .atZone(ZoneOffset.UTC)
+            );
     }
 
     public static void main(String[] args) {
@@ -52,31 +52,33 @@ public class CountingSessionApp {
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
 
-        KStream<String, UserClicks> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
-                Consumed.with(AppSerdes.String(), AppSerdes.UserClicks())
-                        .withTimestampExtractor(new AppTimestampExtractor())
+        KStream<String, UserClicks> KS0 = streamsBuilder.stream(
+            AppConfigs.posTopicName,
+            Consumed.with(AppSerdes.String(), AppSerdes.UserClicks())
+                .withTimestampExtractor(new AppTimestampExtractor())
         );
 
         KGroupedStream<String, UserClicks> KS1 = KS0.groupByKey(
-                Grouped.with(AppSerdes.String(),
-                        AppSerdes.UserClicks()));
+            Grouped.with(AppSerdes.String(),
+                AppSerdes.UserClicks()));
 
         SessionWindowedKStream<String, UserClicks> KS2 = KS1.windowedBy(
-                SessionWindows.with(Duration.ofMinutes(5))
+            SessionWindows.with(Duration.ofMinutes(5))
+                .grace(Duration.ofMinutes(1))
         );
 
         KTable<Windowed<String>, Long> KT3 = KS2.count(
-                //Materialized is not needed if you don't want to override defaults
-                Materialized.<String, Long, SessionStore<Bytes, byte[]>>as("clicks-by-user-session")
+            //Materialized is not needed if you don't want to override defaults
+            Materialized.<String, Long, SessionStore<Bytes, byte[]>>as("clicks-by-user-session")
         );
 
         KT3.toStream().foreach(
-                (kWindowed, v) -> logger.info(
-                        "UserID: " + kWindowed.key() +
-                                " Window Start: " + utcTimeString(kWindowed.window().start()) +
-                                " Window End: " + utcTimeString(kWindowed.window().end()) +
-                                " Count: " + v
-                ));
+            (kWindowed, v) -> logger.info(
+                "UserID: " + kWindowed.key() +
+                    " Window Start: " + utcTimeString(kWindowed.window().start()) +
+                    " Window End: " + utcTimeString(kWindowed.window().end()) +
+                    " Count: " + v
+            ));
 
         KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         streams.start();
