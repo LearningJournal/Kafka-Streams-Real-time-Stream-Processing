@@ -57,12 +57,13 @@ class AppTopology {
             adImpressionCount.leftJoin(adClickCount,
                 (impCount, clkCount) -> new CampaignPerformance()
                     .withAdImpressions(impCount)
-                    .withAdClicks(clkCount))
-                .mapValues((k, v) -> v.withCampaigner(k),
-                    Materialized.<String, CampaignPerformance, KeyValueStore<Bytes, byte[]>>
-                        as(AppConfigs.stateStoreNameCP)
-                        .withKeySerde(AppSerdes.String())
-                        .withValueSerde(AppSerdes.CampaignPerformance()));
+                    .withAdClicks(clkCount)
+            ).mapValues((k, v) -> v.withCampaigner(k),
+                Materialized.<String, CampaignPerformance, KeyValueStore<Bytes, byte[]>>
+                    as(AppConfigs.stateStoreNameCP)
+                    .withKeySerde(AppSerdes.String())
+                    .withValueSerde(AppSerdes.CampaignPerformance())
+            );
 
         campaignPerformance.toStream().to(
             AppConfigs.outputTopic,
