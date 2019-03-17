@@ -44,38 +44,33 @@ public class CustomSinkApp {
         StreamsBuilder streamsBuilder = new StreamsBuilder();
 
         //Global table for mappings
-        GlobalKTable<String, TableMap> topicTableMapGlobalKTable =
-            streamsBuilder.globalTable(
-                AppConfigs.topicTableMap,
-                Consumed.with(
-                    AppSerdes.String(),
-                    AppSerdes.TableMap()));
+        GlobalKTable<String, TableMap> topicTableMapGlobalKTable = streamsBuilder.globalTable(
+            AppConfigs.topicTableMap,
+            Consumed.with(AppSerdes.String(),
+                AppSerdes.TableMap()));
 
-        //Stream of Mapped Records
-        KStream<String, GenericRecord> recordKStream =
-            streamsBuilder.stream(
-                AppConfigs.topicPattern,
-                Consumed.with(
-                    AppSerdes.String(),
-                    AppSerdes.GenericRecord())
-            ).transform(RecordTransformer::new);
+        //Stream of Records
+        KStream<String, GenericRecord> recordKStream = streamsBuilder.stream(
+            AppConfigs.topicPattern,
+            Consumed.with(AppSerdes.String(),
+                AppSerdes.GenericRecord())
+        ).transform(() -> new RecordTransformer());
 
         //Join to get Target Table Name
-        KStream<String, GenericRecord> joinedKStream =
-            recordKStream.join(topicTableMapGlobalKTable,
-                (keyGenericRecord, valueGenericRecord) ->
-                    keyGenericRecord,
-                (valueGenericRecord, valueTableMap) -> {
-                    valueGenericRecord.setAdditionalProperty(
-                        AppConfigs.targetTableField,
-                        valueTableMap.getTargetTable());
-                    return valueGenericRecord;
-                }
-            );
+        KStream<String, GenericRecord> joinedKStream = recordKStream.join(
+            topicTableMapGlobalKTable,
+            (keyGenericRecord, valueGenericRecord) -> keyGenericRecord,
+            (valueGenericRecord, valueTableMap) -> {
+                valueGenericRecord.setAdditionalProperty(
+                    AppConfigs.targetTableField,
+                    valueTableMap.getTargetTable());
+                return valueGenericRecord;
+            }
+        );
 
         //Change key to target table name and cleanup record
-        KStream<String, GenericRecord> sinkRecord =
-            joinedKStream.selectKey((k, v) -> {
+        KStream<String, GenericRecord> sinkRecord = joinedKStream.selectKey(
+            (k, v) -> {
                 String newKey = v.getAdditionalProperties()
                     .get(AppConfigs.targetTableField);
                 v.getAdditionalProperties().remove(AppConfigs.targetTableField);
@@ -83,7 +78,7 @@ public class CustomSinkApp {
             }).peek((k, v) -> logger.info("Ready to Sink key= " + k + " value= " + v));
 
         //Sink to Target Database
-        sinkRecord.process(SinkProcessor::new);
+        sinkRecord.process(() -> new SinkProcessor());
 
         //Start the stream and add a shutdown hook
         KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);

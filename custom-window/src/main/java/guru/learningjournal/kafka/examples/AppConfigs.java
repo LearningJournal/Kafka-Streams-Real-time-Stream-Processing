@@ -29,7 +29,7 @@ public class AppConfigs {
     final static String targetTopicName = "training-feed";
     final static String sourceName = "stock-tick-source";
     final static String sinkName = "training-feed-sink";
-    final static String stateStoreLocation = "tmp/state-store";
+    final static String stateStoreLocation = "logs/state-store";
     public final static int ltpStackSize = 10;
     public final static long secondsDelay = 10;
 

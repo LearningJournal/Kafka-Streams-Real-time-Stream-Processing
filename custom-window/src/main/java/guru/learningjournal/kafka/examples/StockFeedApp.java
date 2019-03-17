@@ -40,7 +40,7 @@ public class StockFeedApp {
 
         topology.addProcessor(
             StockProcessor.PROCESSOR_NAME,
-            StockProcessor::new,
+            () -> new StockProcessor(),
             AppConfigs.sourceName);
 
         StoreBuilder storeBuilder = Stores.keyValueStoreBuilder(

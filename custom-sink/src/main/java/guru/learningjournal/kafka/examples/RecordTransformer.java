@@ -27,8 +27,8 @@ import org.apache.kafka.streams.processor.ProcessorContext;
  */
 
 public class RecordTransformer
-    implements Transformer<String, GenericRecord,
-    KeyValue<String, GenericRecord>> {
+    implements Transformer<String, GenericRecord, KeyValue<String, GenericRecord>> {
+
     private ProcessorContext context;
 
     @Override
@@ -43,6 +43,5 @@ public class RecordTransformer
 
     @Override
     public void close() {
-
     }
 }

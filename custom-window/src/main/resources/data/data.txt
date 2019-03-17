@@ -2,7 +2,7 @@ TCS:{"tickerSymbol": "TCS", "tickerTime": 1551774312763, "lastTradedPrice": 1983
 TCS:{"tickerSymbol": "TCS", "tickerTime": 1551774352763, "lastTradedPrice": 2005}
 TCS:{"tickerSymbol": "TCS", "tickerTime": 1551774382763, "lastTradedPrice": 2035}
 
-ABB:{"tickerSymbol": "ABB", "tickerTime": 1551774312773, "lastTradedPrice": 1234}
-ABB:{"tickerSymbol": "ABB", "tickerTime": 1551774352793, "lastTradedPrice": 1195}
-ABB:{"tickerSymbol": "ABB", "tickerTime": 1551774382863, "lastTradedPrice": 1155}
+ABB:{"tickerSymbol": "ABB", "tickerTime": 1551774313883, "lastTradedPrice": 1234}
+ABB:{"tickerSymbol": "ABB", "tickerTime": 1551774353793, "lastTradedPrice": 1195}
+ABB:{"tickerSymbol": "ABB", "tickerTime": 1551774383963, "lastTradedPrice": 1155}
 
