@@ -3,6 +3,9 @@ This is the central repository for all the materials related to <em>Kafka Stream
 <br> Visit Book's web page at <a href="https://www.learningjournal.guru/ebook/kafka-streams-real-time-stream-processing/"> 
   Kafka Streams Book.
 </a>
+<br> Buy at Google Play <a href="https://play.google.com/store/books/details/Prashant_Kumar_Pandey_Kafka_Streams_Real_time_Stre?id=ms6NDwAAQBAJ">
+Kafka Streams eBook on Google Play Store</a>
+<br> Buy at Amazon <a href="https://www.amazon.com/dp/B07NNBTYS3"> Kafka Streams Kindle Edition<a>
 <div>
 
 <a href="https://www.learningjournal.guru/ebook/kafka-streams-real-time-stream-processing/">
@@ -37,13 +40,12 @@ Kafka Streams: Real-time Stream Processing! is written for software engineers wi
 <li>Chapter 12 - Types and Serialization</li>
 <li>Chapter 13 - States and Stores</li>
 <li>Chapter 14 - Aggregates and Tables</li>
-<li>Chapter 15 - Windows and Joins</li>
-<li>Chapter 16 - Unit Testing Kafka Streams</li>
+<li>Chapter 15 - Timestamps and Windows </li>
+<li>Chapter 16 - Joining Streams and Tables</li>
 <li>Chapter 17 - Streams Architecture</li>
-<li>Chapter 18 - Interactive Query</li>
-<li>Chapter 19 - Processor API</li>
-<li>Chapter 20 - Introduction to KSQL</li>
-<li>Appendix A - Environment Setup</li>
-<li>Appendix B - Kaka Connect</li>
+<li>Chapter 18 - Testing Streams Application</li>
+<li>Chapter 19 - Interactive Query</li>
+<li>Chapter 20 - Processor API</li>
+<li>Appendix A - Setup  and Configuration</li>
 </ul>
 </div>
