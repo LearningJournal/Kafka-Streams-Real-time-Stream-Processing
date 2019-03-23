@@ -3,9 +3,9 @@ This is the central repository for all the materials related to <em>Kafka Stream
 <br> Visit Book's web page at <a href="https://www.learningjournal.guru/ebook/kafka-streams-real-time-stream-processing/"> 
   Kafka Streams Book.
 </a>
-<br> Buy at Google Play <a href="https://play.google.com/store/books/details/Prashant_Kumar_Pandey_Kafka_Streams_Real_time_Stre?id=ms6NDwAAQBAJ">
+<br> Buy at Google Play : <a href="https://play.google.com/store/books/details/Prashant_Kumar_Pandey_Kafka_Streams_Real_time_Stre?id=ms6NDwAAQBAJ">
 Kafka Streams eBook on Google Play Store</a>
-<br> Buy at Amazon <a href="https://www.amazon.com/dp/B07NNBTYS3"> Kafka Streams Kindle Edition<a>
+<br> Buy at Amazon : <a href="https://www.amazon.com/dp/B07NNBTYS3"> Kafka Streams Kindle Edition</a>
 <div>
 
 <a href="https://www.learningjournal.guru/ebook/kafka-streams-real-time-stream-processing/">
