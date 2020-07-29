@@ -19,6 +19,7 @@ import guru.learningjournal.kafka.examples.types.StockTicker;
 import guru.learningjournal.kafka.examples.types.TickerStack;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.processor.Punctuator;
+import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.KeyValueStore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,20 +40,22 @@ public class StockPunctuator implements Punctuator {
     @Override
     public void punctuate(long currentTime) {
         long lastPunctuateTime = currentTime -
-            Duration.ofSeconds(AppConfigs.secondsDelay)
-                .toMillis();
+                Duration.ofSeconds(AppConfigs.secondsDelay)
+                        .toMillis();
 
-        stateStore.all().forEachRemaining((kv) -> {
+        KeyValueIterator<String, TickerStack> stateStoreIterator = stateStore.all();
+        stateStoreIterator.forEachRemaining((kv) -> {
             //logger.info("Last Record Time: " + kv.value.getLatestRecordTime() +
             // " PunctuateTime: " + currentTime);
             if (kv.value.getLatestRecordTime() > lastPunctuateTime) {
                 StockTicker ticker = new StockTicker()
-                    .withTickerSymbol(kv.key)
-                    .withTickerTime(currentTime)
-                    .withLastTradedPrice(kv.value.avgValue());
+                        .withTickerSymbol(kv.key)
+                        .withTickerTime(currentTime)
+                        .withLastTradedPrice(kv.value.avgValue());
                 logger.info("Forward ticker " + ticker.toString() );
                 context.forward(kv.key, ticker);
             }
         });
+        stateStoreIterator.close();
     }
 }
